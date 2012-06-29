@@ -20,7 +20,7 @@ public interface GestionCompetenciasSessionRemote
     public ObjetivoGeneralBO buscarObjGeneral(int idCurso);
     
     public int agregarObjTerminal(ObjetivoTerminalBO objTerminal);
-    public int editarObjTemrinal(ObjetivoTerminalBO objTerminal);
+    public int editarObjTerminal(ObjetivoTerminalBO objTerminal);
     public ObjetivoTerminalBO buscarObjTerminal(int idObjTerminal);
     
     public int agregarObjEspecifico(ObjetivoEspecificoBO objEspecifico);

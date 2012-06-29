@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class ObjetivoGeneralBO implements Serializable
 {
     private int id;
-    private String nombre;
     private String contenido;
     private int idCurso;
     private String codigoCurso;
@@ -19,11 +18,6 @@ public class ObjetivoGeneralBO implements Serializable
     public int getId( )
     {
         return id;
-    }
-
-    public String getNombre( )
-    {
-        return nombre;
     }
 
     public String getContenido( )
@@ -49,11 +43,6 @@ public class ObjetivoGeneralBO implements Serializable
     public void setId( int id )
     {
         this.id = id;
-    }
-
-    public void setNombre( String nombre )
-    {
-        this.nombre = nombre;
     }
 
     public void setContenido( String contenido )

@@ -9,10 +9,11 @@ public class UnidadBO implements Serializable
     private int numero;
     private String nombre;
     private String contenido;
-    private String idCurso;
+    private int idCurso;
     private String codigoCurso;
     private String nombreCurso;
     private List<Integer> metasTerminales;
+    private List<Integer> sesiones;
     
     public UnidadBO( )
     {
@@ -39,7 +40,7 @@ public class UnidadBO implements Serializable
         return contenido;
     }
 
-    public String getIdCurso( )
+    public int getIdCurso( )
     {
         return idCurso;
     }
@@ -57,6 +58,11 @@ public class UnidadBO implements Serializable
     public List<Integer> getMetasTerminales( )
     {
         return metasTerminales;
+    }
+
+    public List<Integer> getSesiones( )
+    {
+        return sesiones;
     }
 
     public void setId( int id )
@@ -79,7 +85,7 @@ public class UnidadBO implements Serializable
         this.contenido = contenido;
     }
 
-    public void setIdCurso( String idCurso )
+    public void setIdCurso( int idCurso )
     {
         this.idCurso = idCurso;
     }
@@ -97,5 +103,10 @@ public class UnidadBO implements Serializable
     public void setMetasTerminales( List<Integer> metasTerminales )
     {
         this.metasTerminales = metasTerminales;
+    }
+
+    public void setSesiones( List<Integer> sesiones )
+    {
+        this.sesiones = sesiones;
     }      
 }
