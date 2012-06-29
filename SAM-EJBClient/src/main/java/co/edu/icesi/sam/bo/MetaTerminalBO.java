@@ -103,5 +103,10 @@ public class MetaTerminalBO implements Serializable
     public void setContenidoObjTerminal( String contenidoObjTerminal )
     {
         this.contenidoObjTerminal = contenidoObjTerminal;
+    }
+
+    public void setObjEspecificos( List<Integer> objEspecificos )
+    {
+        this.objEspecificos = objEspecificos;
     }                
 }
