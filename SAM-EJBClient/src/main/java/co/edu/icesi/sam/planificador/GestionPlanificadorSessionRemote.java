@@ -21,7 +21,6 @@ public interface GestionPlanificadorSessionRemote
     public SaberBO buscarSaber(int idSaber);
     
     public int agregarRecurso(RecursoBO recurso);
-    public int editarSaber(RecursoBO recurso);
     public RecursoBO buscarRecurso(int idRecurso);
     
     public int agregarSesion(SesionBO sesion);
@@ -33,7 +32,8 @@ public interface GestionPlanificadorSessionRemote
     public TrabajoAsignadoBO buscarTrabajoAsignado(int idTrabajoAsignado);
     
     public int agregarRecursoAsignado(RecursoAsignadoBO recursoAsignado);
-    public int editarRecursoAsignado(RecursoAsignadoBO recursoAsignado);
+    public int eliminarRecursoAsignado(RecursoAsignadoBO recursoAsignado);
     public RecursoAsignadoBO buscarRecursoAsignado(int idTrabajoAsignado);
+	int eliminarRecurso(RecursoBO recurso);
     
 }
