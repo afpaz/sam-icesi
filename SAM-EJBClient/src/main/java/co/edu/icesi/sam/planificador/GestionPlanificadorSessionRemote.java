@@ -1,5 +1,7 @@
 package co.edu.icesi.sam.planificador;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 import co.edu.icesi.sam.bo.MaterialBO;
@@ -34,6 +36,8 @@ public interface GestionPlanificadorSessionRemote
     public int agregarRecursoAsignado(RecursoAsignadoBO recursoAsignado);
     public int eliminarRecursoAsignado(RecursoAsignadoBO recursoAsignado);
     public RecursoAsignadoBO buscarRecursoAsignado(int idTrabajoAsignado);
-	int eliminarRecurso(RecursoBO recurso);
+	public int eliminarRecurso(RecursoBO recurso);
+	
+	
     
 }
