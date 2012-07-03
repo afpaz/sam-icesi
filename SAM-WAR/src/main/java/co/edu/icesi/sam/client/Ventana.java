@@ -51,24 +51,43 @@ public class Ventana extends Window {
 		
 		TabItem tbtmNewTabitem_2 = new TabItem("Objetivos Terminales");
 		tabPanel.add(tbtmNewTabitem_2);
+		PanelObjetivosTerminales panelObjTerminales = new PanelObjetivosTerminales( );
+		tbtmNewTabitem_2.add(panelObjTerminales);
+		panelObjTerminales.setVisible( true );
 		
 		TabItem tbtmNewTabitem_3 = new TabItem("Unidades");
 		tabPanel.add(tbtmNewTabitem_3);
+		PanelUnidad panelUnidad = new PanelUnidad( );
+		tbtmNewTabitem_3.add(panelUnidad);
+		panelUnidad.setVisible( true );
 		
 		TabItem tbtmNewTabitem_4 = new TabItem("Objetivos Especificos");
 		tabPanel.add(tbtmNewTabitem_4);
+		PanelObjetivoEspecifico panelObjEspecifico = new PanelObjetivoEspecifico( );
+		tbtmNewTabitem_4.add(panelObjEspecifico);
+		panelObjEspecifico.setVisible( true );
 		
 		TabItem tbtmNewTabitem_5 = new TabItem("Saberes");
 		tabPanel.add(tbtmNewTabitem_5);
+		PanelSaberes panelSaberes = new PanelSaberes( );
+		tbtmNewTabitem_5.add(panelSaberes);
+		panelSaberes.setVisible( true );
 		
 		TabItem tbtmNewTabitem_6 = new TabItem("Materiales del Curso");
 		tabPanel.add(tbtmNewTabitem_6);
+		PanelMateriales panelMateriales = new PanelMateriales( );
+		tbtmNewTabitem_6.add(panelMateriales);
+		panelMateriales.setVisible( true );
 		
 		TabItem tbtmNewTabitem_7 = new TabItem("Recursos");
 		tabPanel.add(tbtmNewTabitem_7);
+	
 		
 		TabItem tbtmNewTabitem = new TabItem("Planificador");
 		tabPanel.add(tbtmNewTabitem);
+		PanelPlanificador panelPlanificador = new PanelPlanificador( );
+		tbtmNewTabitem.add(panelPlanificador);
+		panelPlanificador.setVisible( true );
 		
 		LayoutContainer layoutContainer = new LayoutContainer();
 		add(layoutContainer, new BorderLayoutData(LayoutRegion.NORTH, 55.0f));
