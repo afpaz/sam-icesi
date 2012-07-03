@@ -8,13 +8,6 @@
 	<name>SAM WAR</name>
 	<description>Sam Web Application</description>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.sencha.gxt</groupId>
-			<artifactId>gxt</artifactId>
-			<version>3.0.0</version>
-		</dependency>
-	</dependencies>
 	<repositories>
 		<repository>
 			<id>sencha-commercial-release</id>
@@ -22,4 +15,16 @@
 			<url>https://maven.sencha.com/repo/commercial-release/</url>
 		</repository>
 	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>co.edu.icesi.sam</groupId>
+			<artifactId>sam-ejb</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>co.edu.icesi.sam</groupId>
+			<artifactId>sam-ejbclient</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+	</dependencies>
 </project>

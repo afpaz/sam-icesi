@@ -20,5 +20,13 @@
   <welcome-file-list>
     <welcome-file>SAM_WAR.html</welcome-file>
   </welcome-file-list>
+  <servlet>
+  	<servlet-name>CompetenciasService</servlet-name>
+  	<servlet-class>co.edu.icesi.sam.server.CompetenciasServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CompetenciasService</servlet-name>
+  	<url-pattern>/sam_war/CompetenciasService</url-pattern>
+  </servlet-mapping>
 
 </web-app>

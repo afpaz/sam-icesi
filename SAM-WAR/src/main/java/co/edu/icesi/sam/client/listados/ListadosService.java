@@ -1,8 +1,6 @@
-package co.edu.icesi.sam.listados;
+package co.edu.icesi.sam.client.listados;
 
 import java.util.List;
-
-import javax.ejb.Remote;
 
 import co.edu.icesi.sam.bo.MaterialBO;
 import co.edu.icesi.sam.bo.MetaTerminalBO;
@@ -15,9 +13,13 @@ import co.edu.icesi.sam.bo.SesionBO;
 import co.edu.icesi.sam.bo.TrabajoAsignadoBO;
 import co.edu.icesi.sam.bo.UnidadBO;
 
-@Remote
-public interface ListadosSessionRemote {
-    
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
+
+@RemoteServiceRelativePath("listadosService")
+public interface ListadosService extends RemoteService
+{
     public List<MaterialBO> listarMaterialesPorCurso(int idCurso);
     public List<MetaTerminalBO> listarMetasTerminalesPorCurso(int idCurso);
     public List<ObjetivoEspecificoBO> listarObjEspecificosPorCurso(int idCurso);
