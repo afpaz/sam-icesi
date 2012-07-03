@@ -1,8 +1,4 @@
-package co.edu.icesi.sam.planificador;
-
-import java.util.List;
-
-import javax.ejb.Remote;
+package co.edu.icesi.sam.client.planificador;
 
 import co.edu.icesi.sam.bo.MaterialBO;
 import co.edu.icesi.sam.bo.RecursoAsignadoBO;
@@ -11,8 +7,9 @@ import co.edu.icesi.sam.bo.SaberBO;
 import co.edu.icesi.sam.bo.SesionBO;
 import co.edu.icesi.sam.bo.TrabajoAsignadoBO;
 
-@Remote
-public interface GestionPlanificadorSessionRemote
+import com.google.gwt.user.client.rpc.RemoteService;
+
+public interface PlanificadorService extends RemoteService
 {
     public int agregarMaterial(MaterialBO material);
     public int editarMaterial(MaterialBO material);
@@ -24,7 +21,7 @@ public interface GestionPlanificadorSessionRemote
     
     public int agregarRecurso(RecursoBO recurso);
     public RecursoBO buscarRecurso(int idRecurso);
-    public int eliminarRecurso(RecursoBO recurso);		    
+    public int eliminarRecurso(RecursoBO recurso);
     
     public int agregarSesion(SesionBO sesion);
     public int editarSesion(SesionBO sesion);

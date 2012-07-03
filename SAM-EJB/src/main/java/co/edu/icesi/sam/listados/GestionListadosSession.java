@@ -33,8 +33,8 @@ import co.edu.icesi.sam.entity.Unidad;
 /**
  * Session Bean implementation class ListadosSession
  */
-@Stateless(mappedName = "listadosSession")
-public class ListadosSession implements ListadosSessionRemote {
+@Stateless(mappedName = "gestionListados")
+public class GestionListadosSession implements GestionListadosSessionRemote {
 
     
     @PersistenceContext

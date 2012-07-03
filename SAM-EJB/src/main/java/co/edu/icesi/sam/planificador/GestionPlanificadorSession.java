@@ -404,9 +404,9 @@ public class GestionPlanificadorSession implements GestionPlanificadorSessionRem
 	}
 
 	@Override
-	public RecursoAsignadoBO buscarRecursoAsignado( int idTrabajoAsignado )
+	public RecursoAsignadoBO buscarRecursoAsignado( int idRecursoAsignado )
 	{
-		RecursoAsignado recursoAsignado=em.find(RecursoAsignado.class, idTrabajoAsignado);
+		RecursoAsignado recursoAsignado=em.find(RecursoAsignado.class, idRecursoAsignado);
 		RecursoAsignadoBO bo=new RecursoAsignadoBO();
 
 		bo.setContenidoTrabajoAsignado(recursoAsignado.getTrabajosAsignado().getContenido());
@@ -415,7 +415,7 @@ public class GestionPlanificadorSession implements GestionPlanificadorSessionRem
 		bo.setIdMaterial(recursoAsignado.getRecurso().getMateriale().getId());
 		bo.setIdRecurso(recursoAsignado.getRecurso().getId());
 		bo.setIdSaber(recursoAsignado.getRecurso().getSabere().getId());
-		bo.setIdTrabajoAsignado(idTrabajoAsignado);
+		bo.setIdTrabajoAsignado(idRecursoAsignado);
 		bo.setTipoTrabajoAsignado(recursoAsignado.getTrabajosAsignado().getTipo());
 
 		return bo;
