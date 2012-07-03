@@ -25,19 +25,20 @@ import com.extjs.gxt.ui.client.widget.table.TableColumnModel;
 import com.extjs.gxt.ui.client.widget.table.TableColumn;
 import com.extjs.gxt.ui.client.widget.button.Button;
 
-public class PanelPlanificador extends ContentPanel {
+public class PanelPlanificador extends LayoutContainer
+{
 
 	 /**
 	  * @wbp.parser.entryPoint
 	  */
-	 public void onModuleLoad() {
+	 public PanelPlanificador() {
 		    //setLayout(new FlowLayout(10));
 
-		   // ContentPanel panel = new ContentPanel();
-		    setHeading("AccordionLayout");
-		    setBodyBorder(false);
+		    ContentPanel panel = new ContentPanel();
+		    panel.setHeading("Unidades:");
+		    panel.setBodyBorder(false);
 
-		    setLayout(new AccordionLayout());
+		    panel.setLayout(new AccordionLayout());
 		    //panel.setIcon(Resources.ICONS.accordion());
 
 		    ContentPanel cp = new ContentPanel();
@@ -63,7 +64,7 @@ public class PanelPlanificador extends ContentPanel {
 		    Button btnCrearSesin = new Button("Crear Sesi\u00F3n");
 		    cp.add(btnCrearSesin, new AbsoluteData(184, 151));
 		    
-		    add(cp);
+		    panel.add(cp);
 
 		    TreeStore<ModelData> store = new TreeStore<ModelData>();
 		    TreePanel<ModelData> tree = new TreePanel<ModelData>(store);
@@ -109,29 +110,29 @@ public class PanelPlanificador extends ContentPanel {
 		    cp.setBodyStyleName("pad-text");
 		    cp.setHeading("Settings");
 		    cp.addText("DUMMY_TEXT_SHORT");
-		    add(cp);
+		    panel.add(cp);
 
 		    cp = new ContentPanel();
 		    cp.setAnimCollapse(false);
 		    cp.setBodyStyleName("pad-text");
 		    cp.setHeading("Stuff");
 		    cp.addText("DUMMY_TEXT_SHORT");
-		    add(cp);
+		    panel.add(cp);
 
 		    cp = new ContentPanel();
 		    cp.setAnimCollapse(false);
 		    cp.setBodyStyleName("pad-text");
 		    cp.setHeading("More Stuff");
 		    cp.addText("DUMMY_TEXT_SHORT");
-		    add(cp);
-		    setSize(200, 325);
+		    panel.add(cp);
+		    panel.setSize(200, 325);
 
 		    RootPanel rootPanel = RootPanel.get();
-		    rootPanel.setWidgetPosition(this, 0, 0);
-		    rootPanel.add(this);
-		    setSize("450px", "300px");
+		    rootPanel.setWidgetPosition(panel, 0, 0);
+		    rootPanel.add(panel);
+		    panel.setSize("450px", "300px");
 		    
-		    add(this);
+		    
 		  }
 
 		  private ModelData newItem(String text, String iconStyle) {
