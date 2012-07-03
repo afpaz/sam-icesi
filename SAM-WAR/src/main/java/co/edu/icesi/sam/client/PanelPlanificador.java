@@ -8,6 +8,7 @@ import com.extjs.gxt.ui.client.data.ModelIconProvider;
 import com.extjs.gxt.ui.client.store.TreeStore;
 import com.extjs.gxt.ui.client.util.IconHelper;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.layout.AccordionLayout;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
 import com.extjs.gxt.ui.client.widget.treepanel.TreePanel;
@@ -24,7 +25,7 @@ import com.extjs.gxt.ui.client.widget.table.TableColumnModel;
 import com.extjs.gxt.ui.client.widget.table.TableColumn;
 import com.extjs.gxt.ui.client.widget.button.Button;
 
-public class PanelPlanificador  {
+public class PanelPlanificador extends ContentPanel {
 
 	 /**
 	  * @wbp.parser.entryPoint
@@ -32,11 +33,11 @@ public class PanelPlanificador  {
 	 public void onModuleLoad() {
 		    //setLayout(new FlowLayout(10));
 
-		    ContentPanel panel = new ContentPanel();
-		    panel.setHeading("AccordionLayout");
-		    panel.setBodyBorder(false);
+		   // ContentPanel panel = new ContentPanel();
+		    setHeading("AccordionLayout");
+		    setBodyBorder(false);
 
-		    panel.setLayout(new AccordionLayout());
+		    setLayout(new AccordionLayout());
 		    //panel.setIcon(Resources.ICONS.accordion());
 
 		    ContentPanel cp = new ContentPanel();
@@ -62,7 +63,7 @@ public class PanelPlanificador  {
 		    Button btnCrearSesin = new Button("Crear Sesi\u00F3n");
 		    cp.add(btnCrearSesin, new AbsoluteData(184, 151));
 		    
-		    panel.add(cp);
+		    add(cp);
 
 		    TreeStore<ModelData> store = new TreeStore<ModelData>();
 		    TreePanel<ModelData> tree = new TreePanel<ModelData>(store);
@@ -108,27 +109,29 @@ public class PanelPlanificador  {
 		    cp.setBodyStyleName("pad-text");
 		    cp.setHeading("Settings");
 		    cp.addText("DUMMY_TEXT_SHORT");
-		    panel.add(cp);
+		    add(cp);
 
 		    cp = new ContentPanel();
 		    cp.setAnimCollapse(false);
 		    cp.setBodyStyleName("pad-text");
 		    cp.setHeading("Stuff");
 		    cp.addText("DUMMY_TEXT_SHORT");
-		    panel.add(cp);
+		    add(cp);
 
 		    cp = new ContentPanel();
 		    cp.setAnimCollapse(false);
 		    cp.setBodyStyleName("pad-text");
 		    cp.setHeading("More Stuff");
 		    cp.addText("DUMMY_TEXT_SHORT");
-		    panel.add(cp);
-		    panel.setSize(200, 325);
+		    add(cp);
+		    setSize(200, 325);
 
 		    RootPanel rootPanel = RootPanel.get();
-		    rootPanel.setWidgetPosition(panel, 0, 0);
-		    rootPanel.add(panel);
-		    panel.setSize("450px", "300px");
+		    rootPanel.setWidgetPosition(this, 0, 0);
+		    rootPanel.add(this);
+		    setSize("450px", "300px");
+		    
+		    add(this);
 		  }
 
 		  private ModelData newItem(String text, String iconStyle) {
