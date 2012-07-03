@@ -48,6 +48,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setSesiones( new ArrayList<Sesion>( ) );
 
             em.persist( entidad );
+            em.flush( );
             resp = 0;
         }
         catch( Exception e )
@@ -71,6 +72,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setContenido( unidad.getContenido( ) );
             
             em.merge( entidad );
+            em.flush( );
             resp = 1;
         }
         catch( Exception e )
@@ -127,6 +129,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setCurso( curso );
 
             em.persist( entidad );
+            em.flush( );
             resp = 0;
         }
         catch( Exception e )
@@ -148,6 +151,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setContenido( objGeneral.getContenido( ) );
             
             em.merge( entidad );
+            em.flush( );
             resp = 1;
         }
         catch( Exception e )
@@ -190,6 +194,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setMetasTerminales( new ArrayList<MetaTerminal>( ) );
 
             em.persist( entidad );
+            em.flush( );
             resp = 0;
         }
         catch( Exception e )
@@ -212,6 +217,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setContenido( objTerminal.getContenido( ) );
             
             em.merge( entidad );
+            em.flush( );
             resp = 1;
         }
         catch( Exception e )
@@ -262,6 +268,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setSaberes( new ArrayList<Saber>( ) );
             
             em.persist( entidad );
+            em.flush( );
             resp = 0;
         }
         catch( Exception e )
@@ -284,6 +291,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setContenido( objEspecifico.getContenido( ) );
             
             em.merge( entidad );
+            em.flush( );
             resp = 1;
         }
         catch( Exception e )
@@ -333,6 +341,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             entidad.setObjetivosEspecificos( new ArrayList<ObjetivoEspecifico>( ) );
             
             em.persist( entidad );
+            em.flush( );
             resp = 0;
         }
         catch( Exception e )
@@ -352,6 +361,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
             MetaTerminal entidad = em.find( MetaTerminal.class, metaTerminal.getId( ));
             
             em.remove( entidad );
+            em.flush( );
             resp = 2;
         }
         catch( Exception e )

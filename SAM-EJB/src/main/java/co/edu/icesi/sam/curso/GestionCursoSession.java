@@ -39,6 +39,7 @@ public class GestionCursoSession implements GestionCursoSessionRemote
             entidad.setObjetivosGenerales( new ArrayList<ObjetivoGeneral>( ) );
             entidad.setUnidades( new ArrayList<Unidad>( ) );
             entidad.setObjetivosTerminales( new ArrayList<ObjetivoTerminal>( ) );
+            
             em.persist( entidad );
             em.flush( );
             resp = 0;
@@ -64,6 +65,7 @@ public class GestionCursoSession implements GestionCursoSessionRemote
             entidad.setCodigo( curso.getCodigo( ) );
 
             em.merge( entidad );
+            em.flush( );
             resp = 1;
         }
         catch( Exception e )

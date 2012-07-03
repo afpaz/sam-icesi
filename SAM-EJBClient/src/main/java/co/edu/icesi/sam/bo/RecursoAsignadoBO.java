@@ -11,7 +11,11 @@ public class RecursoAsignadoBO implements Serializable
     private String tipoTrabajoAsignado;
     private int idRecurso;
     private int idSaber;
+    private String nombreSaber;
+    private String contenidoSaber;
+    private String tipoSaber;
     private int idMaterial;
+    private String nombreMaterial;
     
     public RecursoAsignadoBO( )
     {
@@ -53,9 +57,29 @@ public class RecursoAsignadoBO implements Serializable
         return idSaber;
     }
 
+    public String getNombreSaber( )
+    {
+        return nombreSaber;
+    }
+
+    public String getContenidoSaber( )
+    {
+        return contenidoSaber;
+    }
+
+    public String getTipoSaber( )
+    {
+        return tipoSaber;
+    }
+
     public int getIdMaterial( )
     {
         return idMaterial;
+    }
+
+    public String getNombreMaterial( )
+    {
+        return nombreMaterial;
     }
 
     public void setId( int id )
@@ -93,8 +117,28 @@ public class RecursoAsignadoBO implements Serializable
         this.idSaber = idSaber;
     }
 
+    public void setNombreSaber( String nombreSaber )
+    {
+        this.nombreSaber = nombreSaber;
+    }
+
+    public void setContenidoSaber( String contenidoSaber )
+    {
+        this.contenidoSaber = contenidoSaber;
+    }
+
+    public void setTipoSaber( String tipoSaber )
+    {
+        this.tipoSaber = tipoSaber;
+    }
+
     public void setIdMaterial( int idMaterial )
     {
         this.idMaterial = idMaterial;
+    }
+
+    public void setNombreMaterial( String nombreMaterial )
+    {
+        this.nombreMaterial = nombreMaterial;
     }
 }

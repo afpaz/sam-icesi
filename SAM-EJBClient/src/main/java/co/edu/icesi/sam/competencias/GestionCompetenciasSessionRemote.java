@@ -1,11 +1,16 @@
 package co.edu.icesi.sam.competencias;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
+import co.edu.icesi.sam.bo.MaterialBO;
 import co.edu.icesi.sam.bo.MetaTerminalBO;
 import co.edu.icesi.sam.bo.ObjetivoEspecificoBO;
 import co.edu.icesi.sam.bo.ObjetivoGeneralBO;
 import co.edu.icesi.sam.bo.ObjetivoTerminalBO;
+import co.edu.icesi.sam.bo.SaberBO;
+import co.edu.icesi.sam.bo.SesionBO;
 import co.edu.icesi.sam.bo.UnidadBO;
 
 @Remote
@@ -29,6 +34,5 @@ public interface GestionCompetenciasSessionRemote
     
     public int agregarMetaTerminal(MetaTerminalBO metaTerminal);
     public int eliminarMetaTerminal(MetaTerminalBO metaTerminal);
-    public MetaTerminalBO buscarMetaTerminal(int idMetaTerminal);       
-    
+    public MetaTerminalBO buscarMetaTerminal(int idMetaTerminal);   
 }
