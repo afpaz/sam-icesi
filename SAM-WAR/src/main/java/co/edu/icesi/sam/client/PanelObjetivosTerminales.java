@@ -1,34 +1,51 @@
 package co.edu.icesi.sam.client;
 
+import co.edu.icesi.sam.client.competencias.CompetenciasService;
+import co.edu.icesi.sam.client.competencias.CompetenciasServiceAsync;
+import co.edu.icesi.sam.client.multilingual.*;
+
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
+import com.extjs.gxt.ui.client.widget.TabItem;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteData;
-import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.extjs.gxt.ui.client.widget.table.Table;
 import com.extjs.gxt.ui.client.widget.table.TableColumnModel;
 import com.extjs.gxt.ui.client.widget.table.TableColumn;
+import com.google.gwt.core.client.GWT;
 
-public class PanelObjetivosTerminales extends LayoutContainer {
+public class PanelObjetivosTerminales extends TabItem
+{
+    private final static MultiLingualConstants MultiLingualConstants = GWT.create( MultiLingualConstants.class );
+    private final CompetenciasServiceAsync competenciasService = GWT.create( CompetenciasService.class );
+   
+    private Text labObjGeneral;
+    private TextArea txtObjGeneral;
+    private Button btnAgregar;
+    
+    public PanelObjetivosTerminales( )
+    {
+        setText( MultiLingualConstants.tabObjTerminales_text( ) );
+        setSize( 800, 600 );
+        LayoutContainer container = new LayoutContainer( );
+        container.setLayout( new AbsoluteLayout( ) );
 
-	public PanelObjetivosTerminales() {
-		setLayout(new AbsoluteLayout());
-		
-		Text txtNewText = new Text("Objetivo General:");
-		add(txtNewText, new AbsoluteData(36, 6));
-		
-		TextArea txtrNewTextarea = new TextArea();
-		add(txtrNewTextarea, new AbsoluteData(36, 30));
-		txtrNewTextarea.setSize("380px", "60px");
-		txtrNewTextarea.setFieldLabel("New TextArea");
-		
-		Button btnNewButton = new Button("Agregar");
-		add(btnNewButton, new AbsoluteData(210, 257));
-		
-		Table table = new Table(new TableColumnModel(new TableColumn("id.1", "Objetivo Terminal", 0.3f), new TableColumn("id.2", "Contenido", 0.7f)));
-		add(table, new AbsoluteData(36, 105));
-		table.setSize("376px", "146px");
-	}
+        labObjGeneral = new Text( MultiLingualConstants.labObjGeneral_text( ) );
+        container.add( labObjGeneral, new AbsoluteData( 36, 6 ) );
+
+        TextArea txtObjGeneral = new TextArea( );
+        txtObjGeneral.setSize( "380px", "60px" );       
+        container.add( txtObjGeneral, new AbsoluteData( 36, 30 ) );
+
+        Button btnAgregar = new Button( MultiLingualConstants.btnAgregar_text( ) );
+        container.add( btnAgregar, new AbsoluteData( 210, 257 ) );
+
+        Table table = new Table( new TableColumnModel( new TableColumn( "id.1", "Objetivo Terminal", 0.3f ), new TableColumn( "id.2", "Contenido", 0.7f ) ) );
+        container.add( table, new AbsoluteData( 36, 105 ) );
+        table.setSize( "376px", "146px" );
+
+        add( container );
+    }
 }

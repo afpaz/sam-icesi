@@ -1,4 +1,4 @@
-package co.edu.icesi.sam.client;
+package co.edu.icesi.sam.client.dialogos;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.widget.Dialog;
@@ -11,23 +11,31 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.Text;
 
-public class DialogoEditarMaterial extends Dialog {
+public class DialogoCrearObjetivoTerminal extends Dialog {
 
-	public DialogoEditarMaterial() {
+	public DialogoCrearObjetivoTerminal() {
 		setModal(true);
-		setHeading("Editar Material");
+		setHeading("Crear Objetivo Terminal");
 		setLayout(new AbsoluteLayout());
 		
-		Button editar = new Button("Editar");
-		add(editar, new AbsoluteData(196, 98));
-				
+		Button btnNewButton = new Button("Guardar");
+		add(btnNewButton, new AbsoluteData(238, 138));
+		
+		TextField txtfldNewTextfield = new TextField();
+		add(txtfldNewTextfield, new AbsoluteData(157, 25));
+		txtfldNewTextfield.setSize("212px", "24px");
+		txtfldNewTextfield.setFieldLabel("Objetivo Terminal:");
+		
 		TextArea txtrNewTextarea = new TextArea();
-		add(txtrNewTextarea, new AbsoluteData(115, 32));
+		add(txtrNewTextarea, new AbsoluteData(157, 72));
 		txtrNewTextarea.setSize("212px", "60px");
-		txtrNewTextarea.setFieldLabel("Material:");
-				
-		Text txtNewText_1 = new Text("Material:");
-		add(txtNewText_1, new AbsoluteData(47, 32));
+		txtrNewTextarea.setFieldLabel("Contenido:");
+		
+		Text txtNewText = new Text("Objetivo Terminal:");
+		add(txtNewText, new AbsoluteData(30, 36));
+		
+		Text txtNewText_1 = new Text("Contenido:");
+		add(txtNewText_1, new AbsoluteData(30, 72));
 	}
 	protected void onButtonPressed(Button button) {
 		if (button == getButtonBar().getItemByItemId(OK)) {

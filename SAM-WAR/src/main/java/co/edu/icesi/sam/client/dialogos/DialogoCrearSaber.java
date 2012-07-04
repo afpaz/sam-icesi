@@ -1,4 +1,4 @@
-package co.edu.icesi.sam.client;
+package co.edu.icesi.sam.client.dialogos;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.widget.Dialog;
@@ -11,14 +11,14 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.Text;
 
-public class DialogoEditarSaber extends Dialog {
+public class DialogoCrearSaber extends Dialog {
 
-	public DialogoEditarSaber() {
+	public DialogoCrearSaber() {
 		setModal(true);
-		setHeading("Editar Saber");
+		setHeading("Crear Saber");
 		setLayout(new AbsoluteLayout());
 		
-		Button btnNewButton = new Button("Editar");
+		Button btnNewButton = new Button("Guardar");
 		add(btnNewButton, new AbsoluteData(239, 176));
 		
 		TextField txtfldNewTextfield = new TextField();

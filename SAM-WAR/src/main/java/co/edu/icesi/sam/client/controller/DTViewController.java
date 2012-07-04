@@ -1,5 +1,8 @@
 package co.edu.icesi.sam.client.controller;
 
+import co.edu.icesi.sam.client.TabObjGeneral;
+
+import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
 import com.extjs.gxt.ui.client.mvc.Controller;
 
@@ -47,8 +50,10 @@ public class DTViewController extends Controller
             
         }
         else if(event.getType( ).equals( DTEvent.AGREGAR_OBJ_GENERAL ))
-        {
-            
+        {            
+            // TODO: Mostrar Mensaje
+            TabObjGeneral tabObjGeneral = Registry.get( "tabObjGeneral" );
+            tabObjGeneral.asignarObjGeneral();
         }
         else if(event.getType( ).equals( DTEvent.AGREGAR_META_TERMINAL ))
         {
@@ -92,7 +97,7 @@ public class DTViewController extends Controller
         }
         else if(event.getType( ).equals( DTEvent.EDITAR_OBJ_GENERAL ))
         {
-            
+            // TODO: Mostrar Mensaje
         }        
         else if(event.getType( ).equals( DTEvent.EDITAR_OBJ_TERMINAL ))
         {

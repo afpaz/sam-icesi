@@ -1,4 +1,4 @@
-package co.edu.icesi.sam.client;
+package co.edu.icesi.sam.client.dialogos;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.widget.Dialog;
@@ -11,14 +11,14 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.Text;
 
-public class DialogoCrearUnidad extends Dialog {
+public class DialogoEditarSaber extends Dialog {
 
-	public DialogoCrearUnidad() {
+	public DialogoEditarSaber() {
 		setModal(true);
-		setHeading("Crear Unidad");
+		setHeading("Editar Saber");
 		setLayout(new AbsoluteLayout());
 		
-		Button btnNewButton = new Button("Guardar");
+		Button btnNewButton = new Button("Editar");
 		add(btnNewButton, new AbsoluteData(239, 176));
 		
 		TextField txtfldNewTextfield = new TextField();
@@ -37,13 +37,13 @@ public class DialogoCrearUnidad extends Dialog {
 		Text txtNewText_1 = new Text("Contenido:");
 		add(txtNewText_1, new AbsoluteData(30, 110));
 		
-		Text txtNewText_2 = new Text("Numero:");
+		Text txtNewText_2 = new Text("Tipo:");
 		add(txtNewText_2, new AbsoluteData(30, 79));
 		
 		TextField txtfldNewTextfield_1 = new TextField();
 		add(txtfldNewTextfield_1, new AbsoluteData(157, 68));
 		txtfldNewTextfield_1.setSize("212px", "24px");
-		txtfldNewTextfield_1.setFieldLabel("Numero:");
+		txtfldNewTextfield_1.setFieldLabel("Tipo:");
 	}
 	protected void onButtonPressed(Button button) {
 		if (button == getButtonBar().getItemByItemId(OK)) {

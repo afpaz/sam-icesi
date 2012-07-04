@@ -1,4 +1,4 @@
-package co.edu.icesi.sam.client;
+package co.edu.icesi.sam.client.dialogos;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.widget.Dialog;
@@ -11,23 +11,23 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.Text;
 
-public class DialogoCrearMaterial extends Dialog {
+public class DialogoEditarMaterial extends Dialog {
 
-	public DialogoCrearMaterial() {
+	public DialogoEditarMaterial() {
 		setModal(true);
 		setHeading("Editar Material");
 		setLayout(new AbsoluteLayout());
 		
-		Button guardar = new Button("Guardar");
-		add(guardar, new AbsoluteData(239, 176));
+		Button editar = new Button("Editar");
+		add(editar, new AbsoluteData(196, 98));
 				
 		TextArea txtrNewTextarea = new TextArea();
-		add(txtrNewTextarea, new AbsoluteData(157, 110));
+		add(txtrNewTextarea, new AbsoluteData(115, 32));
 		txtrNewTextarea.setSize("212px", "60px");
 		txtrNewTextarea.setFieldLabel("Material:");
 				
 		Text txtNewText_1 = new Text("Material:");
-		add(txtNewText_1, new AbsoluteData(30, 110));
+		add(txtNewText_1, new AbsoluteData(47, 32));
 	}
 	protected void onButtonPressed(Button button) {
 		if (button == getButtonBar().getItemByItemId(OK)) {

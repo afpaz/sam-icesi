@@ -1,4 +1,4 @@
-package co.edu.icesi.sam.client;
+package co.edu.icesi.sam.client.dialogos;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.widget.Dialog;

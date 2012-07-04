@@ -42,7 +42,7 @@ public class Ventana extends Window {
 		add(tabPanel, new BorderLayoutData(LayoutRegion.CENTER));
 		
 		TabItem tbtmNewTabitem_1 = new TabItem("Objetivo General");
-		PanelObjetivoGeneral panelObjGeneral = new PanelObjetivoGeneral( );
+		TabObjGeneral panelObjGeneral = new TabObjGeneral( );
 		tbtmNewTabitem_1.add(panelObjGeneral);
 		panelObjGeneral.setVisible( true );
 		
