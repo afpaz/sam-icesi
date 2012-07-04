@@ -66,11 +66,11 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         try
         {
             Unidad entidad = em.find( Unidad.class, unidad.getId( ) );
-            
+
             entidad.setNumero( unidad.getNumero( ) );
             entidad.setNombre( unidad.getNombre( ) );
             entidad.setContenido( unidad.getContenido( ) );
-            
+
             em.merge( entidad );
             em.flush( );
             resp = 1;
@@ -88,30 +88,30 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     {
         Unidad unidad = em.find( Unidad.class, idUnidad );
         UnidadBO bo = new UnidadBO( );
-        
+
         bo.setId( idUnidad );
         bo.setNumero( unidad.getNumero( ) );
         bo.setNombre( unidad.getNombre( ) );
         bo.setContenido( unidad.getContenido( ) );
-        
+
         bo.setIdCurso( unidad.getCurso( ).getId( ) );
         bo.setCodigoCurso( unidad.getCurso( ).getCodigo( ) );
         bo.setNombreCurso( unidad.getCurso( ).getNombre( ) );
-        
+
         List<Integer> metasTerminales = new ArrayList<Integer>( );
-        for(MetaTerminal mt : unidad.getMetasTerminales( ))
+        for( MetaTerminal mt : unidad.getMetasTerminales( ) )
         {
             metasTerminales.add( mt.getId( ) );
         }
         bo.setMetasTerminales( metasTerminales );
-        
+
         List<Integer> sesiones = new ArrayList<Integer>( );
-        for(Sesion s : unidad.getSesiones( ))
+        for( Sesion s : unidad.getSesiones( ) )
         {
             sesiones.add( s.getId( ) );
         }
         bo.setSesiones( sesiones );
-        
+
         return bo;
     }
 
@@ -124,7 +124,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         try
         {
             Curso curso = em.find( Curso.class, objGeneral.getIdCurso( ) );
-         
+
             entidad.setContenido( objGeneral.getContenido( ) );
             entidad.setCurso( curso );
 
@@ -147,9 +147,9 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         try
         {
             ObjetivoGeneral entidad = em.find( ObjetivoGeneral.class, objGeneral.getId( ) );
-                                   
+
             entidad.setContenido( objGeneral.getContenido( ) );
-            
+
             em.merge( entidad );
             em.flush( );
             resp = 1;
@@ -165,17 +165,25 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     @Override
     public ObjetivoGeneralBO buscarObjGeneral( int idCurso )
     {
-        Curso curso = em.find( Curso.class, idCurso );
-        ObjetivoGeneralBO bo = new ObjetivoGeneralBO( );
-        
-        bo.setId( curso.getObjetivosGenerales( ).get( 0 ).getId( ));
-        bo.setContenido( curso.getObjetivosGenerales( ).get( 0 ).getContenido( ) );
-        
-        bo.setIdCurso( idCurso );
-        bo.setCodigoCurso( curso.getCodigo( ) );
-        bo.setNombreCurso( curso.getNombre( ));
-        
-        return bo;
+        try
+        {
+            Curso curso = em.find( Curso.class, idCurso );
+            ObjetivoGeneralBO bo = new ObjetivoGeneralBO( );
+
+            bo.setId( curso.getObjetivosGenerales( ).get( 0 ).getId( ) );
+            bo.setContenido( curso.getObjetivosGenerales( ).get( 0 ).getContenido( ) );
+
+            bo.setIdCurso( idCurso );
+            bo.setCodigoCurso( curso.getCodigo( ) );
+            bo.setNombreCurso( curso.getNombre( ) );
+
+            return bo;
+        }
+        catch( Exception e )
+        {
+            e.printStackTrace( );
+            return null;
+        }
     }
 
     @Override
@@ -187,7 +195,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         try
         {
             Curso curso = em.find( Curso.class, objTerminal.getIdCurso( ) );
-         
+
             entidad.setNombre( objTerminal.getNombre( ) );
             entidad.setContenido( objTerminal.getContenido( ) );
             entidad.setCurso( curso );
@@ -212,10 +220,10 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         try
         {
             ObjetivoTerminal entidad = em.find( ObjetivoTerminal.class, objTerminal.getId( ) );
-                        
+
             entidad.setNombre( objTerminal.getNombre( ) );
             entidad.setContenido( objTerminal.getContenido( ) );
-            
+
             em.merge( entidad );
             em.flush( );
             resp = 1;
@@ -233,23 +241,23 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     {
         ObjetivoTerminal objTerminal = em.find( ObjetivoTerminal.class, idObjTerminal );
         ObjetivoTerminalBO bo = new ObjetivoTerminalBO( );
-        
-        bo.setId( idObjTerminal );  
+
+        bo.setId( idObjTerminal );
         bo.setNombre( objTerminal.getNombre( ) );
         bo.setContenido( objTerminal.getContenido( ) );
-        
-        bo.setIdCurso( objTerminal.getCurso().getId( ) );
+
+        bo.setIdCurso( objTerminal.getCurso( ).getId( ) );
         bo.setCodigoCurso( objTerminal.getCurso( ).getCodigo( ) );
         bo.setNombreCurso( objTerminal.getCurso( ).getNombre( ) );
-        
+
         List<Integer> metasTerminales = new ArrayList<Integer>( );
-        for(MetaTerminal mt : objTerminal.getMetasTerminales( ))
+        for( MetaTerminal mt : objTerminal.getMetasTerminales( ) )
         {
             metasTerminales.add( mt.getId( ) );
         }
         bo.setMetasTerminales( metasTerminales );
-        
-        return bo;  
+
+        return bo;
     }
 
     @Override
@@ -261,12 +269,12 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         try
         {
             MetaTerminal metaTerminal = em.find( MetaTerminal.class, objEspecifico.getIdMetaTerminal( ) );
-         
+
             entidad.setNombre( objEspecifico.getNombre( ) );
             entidad.setContenido( objEspecifico.getContenido( ) );
             entidad.setMetasTerminale( metaTerminal );
             entidad.setSaberes( new ArrayList<Saber>( ) );
-            
+
             em.persist( entidad );
             em.flush( );
             resp = 0;
@@ -286,10 +294,10 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         try
         {
             ObjetivoEspecifico entidad = em.find( ObjetivoEspecifico.class, objEspecifico.getId( ) );
-                        
+
             entidad.setNombre( objEspecifico.getNombre( ) );
             entidad.setContenido( objEspecifico.getContenido( ) );
-            
+
             em.merge( entidad );
             em.flush( );
             resp = 1;
@@ -307,23 +315,23 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     {
         ObjetivoEspecifico objEspecifico = em.find( ObjetivoEspecifico.class, idObjEspecifico );
         ObjetivoEspecificoBO bo = new ObjetivoEspecificoBO( );
-        
-        bo.setId( idObjEspecifico );  
+
+        bo.setId( idObjEspecifico );
         bo.setNombre( objEspecifico.getNombre( ) );
         bo.setContenido( objEspecifico.getContenido( ) );
-        
+
         bo.setIdMetaTerminal( objEspecifico.getMetasTerminale( ).getId( ) );
-        bo.setIdObjTerminal( objEspecifico.getMetasTerminale( ).getObjetivosTerminale( ).getId( ));
+        bo.setIdObjTerminal( objEspecifico.getMetasTerminale( ).getObjetivosTerminale( ).getId( ) );
         bo.setIdUnidad( objEspecifico.getMetasTerminale( ).getUnidade( ).getId( ) );
-        
+
         List<Integer> saberes = new ArrayList<Integer>( );
-        for(Saber s : objEspecifico.getSaberes( ))
+        for( Saber s : objEspecifico.getSaberes( ) )
         {
             saberes.add( s.getId( ) );
         }
         bo.setSaberes( saberes );
-        
-        return bo;        
+
+        return bo;
     }
 
     @Override
@@ -335,11 +343,11 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         {
             Unidad unidad = em.find( Unidad.class, metaTerminal.getIdUnidad( ) );
             ObjetivoTerminal objTerminal = em.find( ObjetivoTerminal.class, metaTerminal.getIdObjTerminal( ) );
-            
+
             entidad.setObjetivosTerminale( objTerminal );
             entidad.setUnidade( unidad );
             entidad.setObjetivosEspecificos( new ArrayList<ObjetivoEspecifico>( ) );
-            
+
             em.persist( entidad );
             em.flush( );
             resp = 0;
@@ -348,7 +356,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         {
             e.printStackTrace( );
         }
-        
+
         return resp;
     }
 
@@ -358,8 +366,8 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         int resp = -1;
         try
         {
-            MetaTerminal entidad = em.find( MetaTerminal.class, metaTerminal.getId( ));
-            
+            MetaTerminal entidad = em.find( MetaTerminal.class, metaTerminal.getId( ) );
+
             em.remove( entidad );
             em.flush( );
             resp = 2;
@@ -368,8 +376,8 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         {
             e.printStackTrace( );
         }
-        
-        return resp;        
+
+        return resp;
     }
 
     @Override
@@ -377,25 +385,25 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     {
         MetaTerminal metaTerminal = em.find( MetaTerminal.class, idMetaTerminal );
         MetaTerminalBO bo = new MetaTerminalBO( );
-        
+
         bo.setId( idMetaTerminal );
-        
+
         bo.setIdUnidad( metaTerminal.getUnidade( ).getId( ) );
         bo.setNumeroUnidad( metaTerminal.getUnidade( ).getNumero( ) );
         bo.setNombreUnidad( metaTerminal.getUnidade( ).getNombre( ) );
-        bo.setContenidoUnidad( metaTerminal.getUnidade( ).getContenido( ) );       
-        
+        bo.setContenidoUnidad( metaTerminal.getUnidade( ).getContenido( ) );
+
         bo.setIdObjTerminal( metaTerminal.getObjetivosTerminale( ).getId( ) );
         bo.setNombreObjTerminal( metaTerminal.getObjetivosTerminale( ).getNombre( ) );
         bo.setContenidoObjTerminal( metaTerminal.getObjetivosTerminale( ).getContenido( ) );
-        
+
         List<Integer> objEspecificos = new ArrayList<Integer>( );
-        for(ObjetivoEspecifico oe : metaTerminal.getObjetivosEspecificos( ))
+        for( ObjetivoEspecifico oe : metaTerminal.getObjetivosEspecificos( ) )
         {
             objEspecificos.add( oe.getId( ) );
         }
-        bo.setObjEspecificos( objEspecificos );      
-        
+        bo.setObjEspecificos( objEspecificos );
+
         return bo;
     }
 
