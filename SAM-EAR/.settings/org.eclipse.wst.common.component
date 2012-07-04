@@ -9,5 +9,9 @@
         <dependent-module archiveName="SAM-EJBClient.jar" deploy-path="/" handle="module:/resource/SAM-EJBClient/SAM-EJBClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="SAM-WAR.war" deploy-path="/" handle="module:/resource/SAM-WAR/SAM-WAR">
+            <dependent-object/>
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

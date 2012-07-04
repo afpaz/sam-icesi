@@ -37,7 +37,7 @@ public class Ventana extends Window {
 	public Ventana() {
 		setHeading("Ventana SAM Icesi");
 		setLayout(new BorderLayout());
-		
+		setSize(1024,768);
 		com.extjs.gxt.ui.client.widget.TabPanel tabPanel = new com.extjs.gxt.ui.client.widget.TabPanel();
 		add(tabPanel, new BorderLayoutData(LayoutRegion.CENTER));
 		
@@ -81,13 +81,15 @@ public class Ventana extends Window {
 		
 		TabItem tbtmNewTabitem_7 = new TabItem("Recursos");
 		tabPanel.add(tbtmNewTabitem_7);
-	
+		PanelRecursos panelRecursos = new PanelRecursos( );
+		tbtmNewTabitem_7.add(panelRecursos);
+		panelRecursos.setVisible( true );
 		
 		TabItem tbtmNewTabitem = new TabItem("Planificador");
 		tabPanel.add(tbtmNewTabitem);
-		PanelPlanificador panelPlanificador = new PanelPlanificador( );
-		tbtmNewTabitem.add(panelPlanificador);
-		panelPlanificador.setVisible( true );
+//		PanelPlanificador panelPlanificador = new PanelPlanificador( );
+//		tbtmNewTabitem.add(panelPlanificador);
+//		panelPlanificador.setVisible( true );
 		
 		LayoutContainer layoutContainer = new LayoutContainer();
 		add(layoutContainer, new BorderLayoutData(LayoutRegion.NORTH, 55.0f));
