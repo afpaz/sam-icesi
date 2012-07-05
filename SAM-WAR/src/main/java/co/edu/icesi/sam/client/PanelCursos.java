@@ -37,14 +37,13 @@ public class PanelCursos extends LayoutContainer
     private final static MultiLingualConstants MultiLingualConstants = GWT.create( MultiLingualConstants.class );
     private final CursoServiceAsync cursoService = GWT.create( CursoService.class );
 
-    private Grid<CursoModel> grid;
-    private String[] datosNombresColumnas;
+    private Grid<CursoModel> gridCursos;
 
     public PanelCursos( )
     {
-        grid = new Grid<CursoModel>( new ListStore<CursoModel>( ), getColumnModel( ) );
-        grid.setBorders( true );
-        grid.setStripeRows( true );
+        gridCursos = new Grid<CursoModel>( new ListStore<CursoModel>( ), getColumnModel( ) );
+        gridCursos.setBorders( true );
+        gridCursos.setStripeRows( true );
 
         ContentPanel cp = new ContentPanel( );
         cp.setBodyBorder( false );
@@ -52,7 +51,7 @@ public class PanelCursos extends LayoutContainer
         cp.setButtonAlign( HorizontalAlignment.CENTER );
         cp.setLayout( new FitLayout( ) );
         cp.setSize( 310, 600 );
-        cp.add( grid );
+        cp.add( gridCursos );
 
         add( cp );
 
@@ -78,9 +77,9 @@ public class PanelCursos extends LayoutContainer
         } );
     }
 
-    public void eventoSeleccionarCurso( )
+    private void eventoSeleccionarCurso( )
     {
-        grid.addListener( Events.OnClick, new Listener<GridEvent<BaseModel>>( )
+        gridCursos.addListener( Events.OnClick, new Listener<GridEvent<BaseModel>>( )
         {
             public void handleEvent( GridEvent<BaseModel> be )
             {
@@ -93,7 +92,7 @@ public class PanelCursos extends LayoutContainer
 
     public void actualizarPanel( ListStore<CursoModel> listaCursos)
     {
-        grid.reconfigure( listaCursos, getColumnModel( ) );
+        gridCursos.reconfigure( listaCursos, getColumnModel( ) );
     }
 
     private ColumnModel getColumnModel( )

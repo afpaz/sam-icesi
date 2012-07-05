@@ -80,6 +80,8 @@ public class GestionCursoSession implements GestionCursoSessionRemote
     public CursoBO buscarCurso( int idCurso )
     {
         Curso curso = em.find( Curso.class, idCurso );
+        em.refresh( curso );
+
         CursoBO bo = new CursoBO( );
 
         bo.setId( idCurso );

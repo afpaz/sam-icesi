@@ -52,12 +52,12 @@ public class CursoModel extends BaseModel implements Serializable
         set( "nombre", nombre );
     }       
     
-    public CursoModel toModelFromBO(CursoBO c)
+    public static CursoModel toModelFromBO(CursoBO bo)
     {
         CursoModel cModel = new CursoModel( );
-        cModel.setId( c.getId( ));
-        cModel.setCodigo( c.getCodigo( ) );
-        cModel.setNombre( c.getNombre( ) );
+        cModel.setId( bo.getId( ));
+        cModel.setCodigo( bo.getCodigo( ) );
+        cModel.setNombre( bo.getNombre( ) );
         
         return cModel;
     }

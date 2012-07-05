@@ -3,6 +3,9 @@ package co.edu.icesi.sam.client.model;
 import java.io.Serializable;
 import java.util.List;
 
+import co.edu.icesi.sam.bo.MetaTerminalBO;
+import co.edu.icesi.sam.bo.ObjetivoEspecificoBO;
+
 import com.extjs.gxt.ui.client.data.BaseModel;
 
 public class ObjetivoEspecificoModel extends BaseModel implements Serializable
@@ -47,5 +50,15 @@ public class ObjetivoEspecificoModel extends BaseModel implements Serializable
     public void setContenido( String contenido )
     {
         set("contenido", contenido);
+    }
+    
+    public static ObjetivoEspecificoModel toModelFromBO(ObjetivoEspecificoBO bo)
+    {
+        ObjetivoEspecificoModel oeModel = new ObjetivoEspecificoModel( );
+        oeModel.setId( bo.getId( ) );
+        oeModel.setNombre( bo.getNombre() );
+        oeModel.setContenido( bo.getContenido() );
+           
+        return oeModel;
     }
 }

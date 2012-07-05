@@ -76,6 +76,7 @@ public class GestionPlanificadorSession implements GestionPlanificadorSessionRem
 	public MaterialBO buscarMaterial( int idMaterial )
 	{
 		Material material=em.find(Material.class, idMaterial);
+        em.refresh( material );
 		MaterialBO bo=new MaterialBO();
 
 		bo.setCodigoCurso(material.getCurso().getCodigo());
@@ -143,6 +144,8 @@ public class GestionPlanificadorSession implements GestionPlanificadorSessionRem
 	public SaberBO buscarSaber( int idSaber )
 	{
 		Saber saber=em.find(Saber.class, idSaber);
+        em.refresh( saber );
+
 		SaberBO bo=new SaberBO();
 
 		bo.setContenido(saber.getContenido());
@@ -207,6 +210,7 @@ public class GestionPlanificadorSession implements GestionPlanificadorSessionRem
 	public RecursoBO buscarRecurso( int idRecurso )
 	{
 		Recurso recurso=em.find(Recurso.class, idRecurso);
+        em.refresh( recurso );
 		RecursoBO bo=new RecursoBO();
 
 		bo.setContenidoSaber(recurso.getSabere().getContenido());
@@ -274,6 +278,7 @@ public class GestionPlanificadorSession implements GestionPlanificadorSessionRem
 	public SesionBO buscarSesion( int idSesion )
 	{
 		Sesion sesion=em.find(Sesion.class, idSesion);
+		em.refresh( sesion );
 		SesionBO bo=new SesionBO();
 
 		bo.setContenidoUnidad(sesion.getUnidade().getContenido());
@@ -343,6 +348,7 @@ public class GestionPlanificadorSession implements GestionPlanificadorSessionRem
 	public TrabajoAsignadoBO buscarTrabajoAsignado( int idTrabajoAsignado )
 	{
 		TrabajoAsignado trabajoAsignado=em.find(TrabajoAsignado.class, idTrabajoAsignado);
+		em.refresh( trabajoAsignado );
 		TrabajoAsignadoBO bo=new TrabajoAsignadoBO();
 
 		bo.setContenido(trabajoAsignado.getContenido());
@@ -407,6 +413,7 @@ public class GestionPlanificadorSession implements GestionPlanificadorSessionRem
 	public RecursoAsignadoBO buscarRecursoAsignado( int idRecursoAsignado )
 	{
 		RecursoAsignado recursoAsignado=em.find(RecursoAsignado.class, idRecursoAsignado);
+		em.refresh( recursoAsignado );
 		RecursoAsignadoBO bo=new RecursoAsignadoBO();
 
 		bo.setContenidoTrabajoAsignado(recursoAsignado.getTrabajosAsignado().getContenido());

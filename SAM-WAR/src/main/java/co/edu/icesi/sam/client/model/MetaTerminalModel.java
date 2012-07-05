@@ -1,6 +1,9 @@
 package co.edu.icesi.sam.client.model;
 
 import java.io.Serializable;
+
+import co.edu.icesi.sam.bo.MetaTerminalBO;
+
 import com.extjs.gxt.ui.client.data.BaseModel;
 
 public class MetaTerminalModel extends BaseModel implements Serializable
@@ -68,4 +71,16 @@ public class MetaTerminalModel extends BaseModel implements Serializable
     {
         set("contenidoObjTerminal", contenidoObjTerminal);
     }         
+    
+    public static MetaTerminalModel toModelFromBO(MetaTerminalBO bo)
+    {
+        MetaTerminalModel mModel = new MetaTerminalModel( );
+        mModel.setId( bo.getId( ) );
+        mModel.setNombreUnidad( bo.getNombreUnidad( ) );
+        mModel.setContenidoUnidad( bo.getContenidoUnidad( ) );
+        mModel.setNombreObjTerminal( bo.getNombreObjTerminal( ) );
+        mModel.setContenidoObjTerminal( bo.getContenidoObjTerminal( ) );
+        
+        return mModel;
+    }
 }

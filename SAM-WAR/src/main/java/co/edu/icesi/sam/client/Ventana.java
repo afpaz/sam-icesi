@@ -63,7 +63,7 @@ public class Ventana extends Window {
 		
 		TabItem tbtmNewTabitem_4 = new TabItem("Objetivos Especificos");
 		tabPanel.add(tbtmNewTabitem_4);
-		PanelObjetivoEspecifico panelObjEspecifico = new PanelObjetivoEspecifico( );
+		TabObjEspecificos panelObjEspecifico = new TabObjEspecificos( );
 		tbtmNewTabitem_4.add(panelObjEspecifico);
 		panelObjEspecifico.setVisible( true );
 		

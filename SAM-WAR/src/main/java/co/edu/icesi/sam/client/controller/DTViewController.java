@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.icesi.sam.bo.CursoBO;
+import co.edu.icesi.sam.bo.MetaTerminalBO;
+import co.edu.icesi.sam.bo.ObjetivoEspecificoBO;
 import co.edu.icesi.sam.client.PanelCursos;
+import co.edu.icesi.sam.client.TabObjEspecificos;
 import co.edu.icesi.sam.client.TabObjGeneral;
 import co.edu.icesi.sam.client.model.CursoModel;
+import co.edu.icesi.sam.client.model.MetaTerminalModel;
+import co.edu.icesi.sam.client.model.ObjetivoEspecificoModel;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -19,7 +24,9 @@ public class DTViewController extends Controller
     public DTViewController( )
     {
         registerEventTypes( DTEvent.ACTUALIZAR_LISTADO_CURSOS );
+        registerEventTypes( DTEvent.ACTUALIZAR_METAS_TERMINALES );
         registerEventTypes( DTEvent.ACTUALIZAR_OBJ_GENERAL );
+        registerEventTypes( DTEvent.ACTUALIZAR_OBJ_ESPECIFICOS );        
         registerEventTypes( DTEvent.AGREGAR_MATERIAL );
         registerEventTypes( DTEvent.AGREGAR_META_TERMINAL );
         registerEventTypes( DTEvent.AGREGAR_OBJ_ESPECIFICO );
@@ -63,13 +70,38 @@ public class DTViewController extends Controller
             ListStore<CursoModel> cursosModel = new ListStore<CursoModel>( );
             
             for(CursoBO bo : cursos)
-            {
-                CursoModel model = new CursoModel( );
-                cursosModel.add( model.toModelFromBO( bo ) );
+            {                
+                cursosModel.add( CursoModel.toModelFromBO( bo ) );
             }
             
             PanelCursos panelCursos = Registry.get( "panelCursos" );
             panelCursos.actualizarPanel( cursosModel );
+        }
+        else if(event.getType( ).equals( DTEvent.ACTUALIZAR_METAS_TERMINALES ))
+        {
+            List<MetaTerminalBO> metasTerminales = (List<MetaTerminalBO>) event.getData( );
+            ListStore<MetaTerminalModel> metasModel = new ListStore<MetaTerminalModel>( );
+            
+            for(MetaTerminalBO bo : metasTerminales)
+            {               
+                metasModel.add( MetaTerminalModel.toModelFromBO( bo ) );
+            }
+            
+            TabObjEspecificos tabObjEspecificos = Registry.get( "tabObjEspecificos" );
+            tabObjEspecificos.actualizarTablaMetasTerminales( metasModel );
+        }
+        else if(event.getType( ).equals( DTEvent.ACTUALIZAR_OBJ_ESPECIFICOS ))
+        {
+            List<ObjetivoEspecificoBO> objEspecificos = (List<ObjetivoEspecificoBO>) event.getData( );
+            ListStore<ObjetivoEspecificoModel> objModel = new ListStore<ObjetivoEspecificoModel>( );
+            
+            for(ObjetivoEspecificoBO bo : objEspecificos)
+            {               
+                objModel.add( ObjetivoEspecificoModel.toModelFromBO( bo ) );
+            }
+            
+            TabObjEspecificos tabObjEspecificos = Registry.get( "tabObjEspecificos" );
+            tabObjEspecificos.actualizarTablaObjEspecificos( objModel );
         }
         else if(event.getType( ).equals( DTEvent.ACTUALIZAR_OBJ_GENERAL ))
         {                     
@@ -151,9 +183,10 @@ public class DTViewController extends Controller
             
             TabPanel tabs = Registry.get( "tabs" );
             tabs.enable( );
-            
+                        
             TabObjGeneral tabObjGeneral = Registry.get( "tabObjGeneral" );
             tabObjGeneral.asignarObjGeneral( );
+            tabs.setSelection(tabObjGeneral );
         }
     }
 

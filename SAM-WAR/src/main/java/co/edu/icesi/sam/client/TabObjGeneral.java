@@ -6,7 +6,10 @@ import co.edu.icesi.sam.client.competencias.CompetenciasServiceAsync;
 import co.edu.icesi.sam.client.controller.DTEvent;
 import co.edu.icesi.sam.client.multilingual.MultiLingualConstants;
 
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Info;
@@ -53,11 +56,25 @@ public class TabObjGeneral extends TabItem
        
         add(container);
                 
+        eventoCargarTab( );
         eventoAgregarObjGeneral( );
         eventoEditarObjGeneral( );
     }  
-
-    public void eventoAgregarObjGeneral( )
+    
+    private void eventoCargarTab()
+    {
+        this.addListener( Events.Select, new Listener<BaseEvent>( )
+        {
+            @Override
+            public void handleEvent( BaseEvent be )
+            {
+                Dispatcher.forwardEvent( DTEvent.ACTUALIZAR_OBJ_GENERAL );
+            }
+            
+        } );
+    }
+    
+    private void eventoAgregarObjGeneral( )
     {
         btnGuardar.addSelectionListener( new SelectionListener<ButtonEvent>( )
         {
@@ -73,7 +90,7 @@ public class TabObjGeneral extends TabItem
         } );
     }
 
-    public void eventoEditarObjGeneral( )
+    private void eventoEditarObjGeneral( )
     {
         btnGuardar.addSelectionListener( new SelectionListener<ButtonEvent>( )
         {

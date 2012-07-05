@@ -87,6 +87,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     public UnidadBO buscarUnidad( int idUnidad )
     {
         Unidad unidad = em.find( Unidad.class, idUnidad );
+        em.refresh( unidad );
         UnidadBO bo = new UnidadBO( );
 
         bo.setId( idUnidad );
@@ -241,6 +242,8 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     public ObjetivoTerminalBO buscarObjTerminal( int idObjTerminal )
     {
         ObjetivoTerminal objTerminal = em.find( ObjetivoTerminal.class, idObjTerminal );
+        em.refresh( objTerminal );
+
         ObjetivoTerminalBO bo = new ObjetivoTerminalBO( );
 
         bo.setId( idObjTerminal );
@@ -315,6 +318,8 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     public ObjetivoEspecificoBO buscarObjEspecifico( int idObjEspecifico )
     {
         ObjetivoEspecifico objEspecifico = em.find( ObjetivoEspecifico.class, idObjEspecifico );
+        em.refresh( objEspecifico );
+
         ObjetivoEspecificoBO bo = new ObjetivoEspecificoBO( );
 
         bo.setId( idObjEspecifico );
@@ -385,6 +390,8 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
     public MetaTerminalBO buscarMetaTerminal( int idMetaTerminal )
     {
         MetaTerminal metaTerminal = em.find( MetaTerminal.class, idMetaTerminal );
+        em.refresh( metaTerminal );
+
         MetaTerminalBO bo = new MetaTerminalBO( );
 
         bo.setId( idMetaTerminal );
