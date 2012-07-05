@@ -31,6 +31,8 @@ public class PanelObjetivoEspecifico extends LayoutContainer {
 	private Grid<CursoModel> gridObj;
 	private Grid<CursoModel> gridUnidad;
 	private String[] datosNombresColumnas;
+	private ColumnModel cmUnidad;
+	private ColumnModel cmObj;
 
 	public PanelObjetivoEspecifico() {
 		setLayout(new AbsoluteLayout());
@@ -56,14 +58,14 @@ public class PanelObjetivoEspecifico extends LayoutContainer {
 		ColumnConfig columnUnidad = new ColumnConfig();    
 		columnUnidad.setId("id");    
 		columnUnidad.setHeader("Identificacion");    
-		columnUnidad.setWidth(200);    
+		columnUnidad.setWidth(80);    
 		configsUnidad.add(columnUnidad);  
 
-		columnUnidad = new ColumnConfig("contenidoUnidad", "Contenido Unidad", 150);    
+		columnUnidad = new ColumnConfig("contenidoUnidad", "Contenido Unidad", 100);    
 		columnUnidad.setAlignment(HorizontalAlignment.LEFT);    
 		configsUnidad.add(columnUnidad);  
 		
-		columnUnidad = new ColumnConfig("objetivoTerminal", "Objetivo Terminal", 150);    
+		columnUnidad = new ColumnConfig("objetivoTerminal", "Objetivo Terminal", 100);    
 		columnUnidad.setAlignment(HorizontalAlignment.LEFT);    
 		configsUnidad.add(columnUnidad);  
 		
@@ -74,7 +76,7 @@ public class PanelObjetivoEspecifico extends LayoutContainer {
 		ListStore<CursoModel> listaUnidades = new ListStore<CursoModel>();    
 		//employeeList.add(TestData.getEmployees()); 
 
-		ColumnModel cmUnidad = new ColumnModel(configsUnidad);  
+		cmUnidad = new ColumnModel(configsUnidad);  
 		gridUnidad = new Grid<CursoModel>(listaUnidades, cmUnidad);   
 		gridUnidad.setStyleAttribute("borderTop", "none");   
 		gridUnidad.setAutoExpandColumn("name");   
@@ -86,10 +88,10 @@ public class PanelObjetivoEspecifico extends LayoutContainer {
 		cpUnidad.setHeading("Lista de Unidades:");    
 		cpUnidad.setButtonAlign(HorizontalAlignment.CENTER);    
 		cpUnidad.setLayout(new FitLayout());    
-		cpUnidad.setSize(700, 300);   
+		cpUnidad.setSize(450, 93);   
 		cpUnidad.add(gridUnidad);    
-		RootPanel.get().add(cpUnidad);
-
+		//RootPanel.get().add(cpUnidad);
+		add(cpUnidad, new AbsoluteData(36, 30));
 
 		//CARGA LA TABLA DE OBJETIVOS ESPECIFICOS
 		List<ColumnConfig> configsObj = new ArrayList<ColumnConfig>();  
@@ -97,21 +99,21 @@ public class PanelObjetivoEspecifico extends LayoutContainer {
 		ColumnConfig columnObj = new ColumnConfig();    
 		columnObj.setId("id");    
 		columnObj.setHeader("Identificacion");    
-		columnObj.setWidth(200);    
+		columnObj.setWidth(80);    
 		configsObj.add(columnObj);  
 
-		columnObj = new ColumnConfig("nombre", "Objetivo Especifico", 150);    
+		columnObj = new ColumnConfig("nombre", "Objetivo Especifico", 100);    
 		columnObj.setAlignment(HorizontalAlignment.LEFT);    
 		configsObj.add(columnObj);  
 
-		columnObj = new ColumnConfig("contenido", "Contenido", 150);    
+		columnObj = new ColumnConfig("contenido", "Contenido", 200);    
 		columnObj.setAlignment(HorizontalAlignment.LEFT);    
 		configsObj.add(columnObj);  
 
 		ListStore<CursoModel> listaObjetivos = new ListStore<CursoModel>();    
 		//employeeList.add(TestData.getEmployees()); 
 
-		ColumnModel cmObj = new ColumnModel(configsObj);  
+		 cmObj = new ColumnModel(configsObj);  
 		gridObj = new Grid<CursoModel>(listaObjetivos, cmObj);   
 		gridObj.setStyleAttribute("borderTop", "none");   
 		gridObj.setAutoExpandColumn("name");   
@@ -123,9 +125,12 @@ public class PanelObjetivoEspecifico extends LayoutContainer {
 		cpObj.setHeading("Lista de Objetivos Especificos:");    
 		cpObj.setButtonAlign(HorizontalAlignment.CENTER);    
 		cpObj.setLayout(new FitLayout());    
-		cpObj.setSize(700, 300);   
-		cpObj.add(gridObj);    
-		RootPanel.get().add(cpObj);
+		cpObj.setSize(450, 116);   
+		cpObj.add(gridObj);   
+		
+		add(cpObj, new AbsoluteData(36, 156));
+		
+		//RootPanel.get().add(cpObj);
 
 		//		ListStore<Employee> employeeList2 = employeeList;
 		//		DateTimeFormat f = DateTimeFormat.getFormat("yyyy-mm-dd");  
@@ -195,17 +200,17 @@ public class PanelObjetivoEspecifico extends LayoutContainer {
 
 	}
 
-	public void actualizarTablaUnidad(ListStore<CursoModel> listaUnidades, ColumnModel cm){
+	public void actualizarTablaUnidad(ListStore<CursoModel> listaUnidades){
 
-		gridUnidad.reconfigure(listaUnidades, cm);
-		RootPanel.get().add(gridUnidad);
+		gridUnidad.reconfigure(listaUnidades, cmUnidad);
+		//RootPanel.get().add(gridUnidad);
 
 	}
 
-	public void actualizarTablaObjEspecifico(ListStore<CursoModel> listaObjs, ColumnModel cm){
+	public void actualizarTablaObjEspecifico(ListStore<CursoModel> listaObj){
 
-		gridObj.reconfigure(listaObjs, cm);
-		RootPanel.get().add(gridObj);
+		gridObj.reconfigure(listaObj, cmObj);
+		//RootPanel.get().add(gridObj);
 
 	}
 }
