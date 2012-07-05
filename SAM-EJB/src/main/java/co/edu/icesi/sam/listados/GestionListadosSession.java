@@ -44,6 +44,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<MaterialBO> listarMaterialesPorCurso( int idCurso )
     {
         Curso curso = em.find( Curso.class, idCurso );
+        em.refresh( curso );
         List<MaterialBO> materiales = new ArrayList<MaterialBO>( );
         
         for(Material m : curso.getMateriales( ))
@@ -62,7 +63,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     @Override
     public List<MetaTerminalBO> listarMetasTerminalesPorCurso( int idCurso )
     {
-        String query = "SELECT mt FROM Curso c, Unidad u, MetaTerminal mt WHERE mt.unidade = u and u.curso.id = :idCurso";
+        String query = "SELECT DISTINCT (mt) FROM Curso c, Unidad u, MetaTerminal mt WHERE mt.unidade = u and u.curso.id = :idCurso";
         Query q = em.createQuery( query );
         q.setParameter( "idCurso", idCurso );
         List<MetaTerminal> metasTerminales = q.getResultList( );
@@ -91,7 +92,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     @Override
     public List<ObjetivoEspecificoBO> listarObjEspecificosPorCurso( int idCurso )
     {
-        String query = "SELECT oe FROM Curso c, Unidad u, MetaTerminal mt, ObjetivoEspecifico oe WHERE oe.metasTerminale = mt AND mt.unidade = u AND u.curso.id = :idCurso";
+        String query = "SELECT DISTINCT (oe) FROM Curso c, Unidad u, MetaTerminal mt, ObjetivoEspecifico oe WHERE oe.metasTerminale = mt AND mt.unidade = u AND u.curso.id = :idCurso";
         Query q = em.createQuery( query );
         q.setParameter( "idCurso", idCurso );
         List<ObjetivoEspecifico> objEspecificos = q.getResultList( );
@@ -115,6 +116,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<ObjetivoEspecificoBO> listarObjEspecificosPorMetaTerminal( int idMetaTerminal )
     {
         MetaTerminal metaTerminal = em.find( MetaTerminal.class, idMetaTerminal );
+        em.refresh( metaTerminal );
         List<ObjetivoEspecificoBO> objEspecificos = new ArrayList<ObjetivoEspecificoBO>( );
         
         for(ObjetivoEspecifico oe : metaTerminal.getObjetivosEspecificos( ))
@@ -134,7 +136,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     @Override
     public List<ObjetivoEspecificoBO> listarObjEspecificosPorUnidad( int idUnidad )
     {
-        String query = "SELECT oe FROM Unidad u, MetaTerminal mt, ObjetivoEspecifico oe WHERE oe.metasTerminale = mt AND mt.unidade = u AND u.id = :idUnidad";
+        String query = "SELECT DISTINCT(oe) FROM Unidad u, MetaTerminal mt, ObjetivoEspecifico oe WHERE oe.metasTerminale = mt AND mt.unidade = u AND u.id = :idUnidad";
         Query q = em.createQuery( query );
         q.setParameter( "idUnidad", idUnidad );
         List<ObjetivoEspecifico> objEspecificos = q.getResultList( );
@@ -158,6 +160,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<ObjetivoTerminalBO> listarObjTerminalesPorCurso( int idCurso )
     {
         Curso curso = em.find( Curso.class, idCurso );
+        em.refresh( curso );
         List<ObjetivoTerminalBO> objTerminales = new ArrayList<ObjetivoTerminalBO>( );
         
         for(ObjetivoTerminal ot : curso.getObjetivosTerminales( ))
@@ -178,6 +181,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<RecursoBO> listarRecursosPorSaber( int idSaber )
     {
         Saber saber = em.find( Saber.class, idSaber );
+        em.refresh( saber );
         List<RecursoBO> recursos = new ArrayList<RecursoBO>( );
         
         for(Recurso r : saber.getRecursos( ))
@@ -203,6 +207,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<SaberBO> listarSaberesPorObjetivoEspecifico( int idObjEspecifico )
     {
         ObjetivoEspecifico objEspecifico = em.find( ObjetivoEspecifico.class, idObjEspecifico );
+        em.refresh( objEspecifico );
         List<SaberBO> saberes = new ArrayList<SaberBO>( );
         
         for(Saber s : objEspecifico.getSaberes( ))
@@ -224,6 +229,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<SesionBO> listarSesionesPorUnidad( int idUnidad )
     {
         Unidad unidad = em.find( Unidad.class, idUnidad );
+        em.refresh( unidad );
         List<SesionBO> sesiones = new ArrayList<SesionBO>( );
         
         for(Sesion s : unidad.getSesiones( ))
@@ -244,6 +250,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<TrabajoAsignadoBO> listarTrabajosAsignadosPorSesion( int idSesion )
     {
        Sesion sesion = em.find( Sesion.class, idSesion);
+       em.refresh( sesion );
         List<TrabajoAsignadoBO> trabajosAsignados = new ArrayList<TrabajoAsignadoBO>( );
         
         for(TrabajoAsignado ta : sesion.getTrabajosAsignados( ))
@@ -265,6 +272,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<RecursoAsignadoBO> listarRecursosAsignadosPorTrabajoAsignado( int idTrabajoAsignado )
     {
         TrabajoAsignado trabajoAsignado = em.find( TrabajoAsignado.class, idTrabajoAsignado );
+        em.refresh( trabajoAsignado );
         List<RecursoAsignadoBO> recursos = new ArrayList<RecursoAsignadoBO>( );
         
         for(RecursoAsignado r : trabajoAsignado.getRecursosAsignados( ))
@@ -291,6 +299,7 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
     public List<UnidadBO> listarUnidadesPorCurso( int idCurso )
     {
         Curso curso = em.find( Curso.class, idCurso );
+        em.refresh( curso );
         List<UnidadBO> unidades = new ArrayList<UnidadBO>( );
         
         for( Unidad u : curso.getUnidades( ) )

@@ -51,7 +51,7 @@ public class Ventana extends Window {
 		
 		TabItem tbtmNewTabitem_2 = new TabItem("Objetivos Terminales");
 		tabPanel.add(tbtmNewTabitem_2);
-		PanelObjetivosTerminales panelObjTerminales = new PanelObjetivosTerminales( );
+		TabObjTerminales panelObjTerminales = new TabObjTerminales( );
 		tbtmNewTabitem_2.add(panelObjTerminales);
 		panelObjTerminales.setVisible( true );
 		

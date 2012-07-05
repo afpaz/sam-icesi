@@ -6,6 +6,7 @@
 		<project>SAM-EJB</project>
 		<project>SAM-EJBClient</project>
 		<project>SAM-WAR</project>
+		<project>IngesoftWAR</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -48,7 +48,11 @@ public class SAM_WAR implements EntryPoint
         
         TabObjGeneral tabObjGeneral = new TabObjGeneral( );        
         Registry.register( "tabObjGeneral", tabObjGeneral );
+        
+        TabObjTerminales tabObjTerminales = new TabObjTerminales( );
+        Registry.register( "tabObjTerminales", tabObjTerminales );
 
+        tabs.add( tabObjTerminales );
         tabs.add( tabObjGeneral );
         RootPanel.get("tabs").add( tabs );
     }

@@ -7,19 +7,15 @@ import co.edu.icesi.sam.client.controller.DTEvent;
 import co.edu.icesi.sam.client.multilingual.MultiLingualConstants;
 
 import com.extjs.gxt.ui.client.event.ButtonEvent;
-import com.extjs.gxt.ui.client.event.DomEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
-import com.extjs.gxt.ui.client.event.WidgetListener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.TabItem;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteData;
 import com.extjs.gxt.ui.client.Registry;
-import com.extjs.gxt.ui.client.Style;
 import com.extjs.gxt.ui.client.widget.Text;
 import com.extjs.gxt.ui.client.widget.button.Button;
 import com.gargoylesoftware.htmlunit.javascript.host.Event;
@@ -56,25 +52,10 @@ public class TabObjGeneral extends TabItem
         container.add( btnGuardar, new AbsoluteData( 194, 183 ) );
        
         add(container);
-        
-        eventoOnLoad( );
+                
         eventoAgregarObjGeneral( );
         eventoEditarObjGeneral( );
-    }
-
-    public void eventoOnLoad( )
-    {
-        this.addListener( Events.OnClick, new Listener<DomEvent>( )
-        {
-
-            @Override
-            public void handleEvent( DomEvent be )
-            {
-               Registry.register( "idCurso", 1 );
-               asignarObjGeneral( );
-            }
-        } );
-    }
+    }  
 
     public void eventoAgregarObjGeneral( )
     {
@@ -141,6 +122,7 @@ public class TabObjGeneral extends TabItem
             @Override
             public void onSuccess( Integer result )
             {
+                Info.display( "Prueba", "Edición exitosa" );               
                 Dispatcher.forwardEvent( DTEvent.EDITAR_OBJ_GENERAL, result );
             }
 

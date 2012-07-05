@@ -9,8 +9,12 @@ public interface MultiLingualConstants extends Constants
     String btnAgregar_text();
     String btnEditar_text();
     
+    String labNombre_text();
+    String labContenido_text();
+    
     String tabObjGeneral_text();
     String labObjGeneral_text();
     
     String tabObjTerminales_text();
+    String dialogoAgregarObjTerminal_heading();
 }

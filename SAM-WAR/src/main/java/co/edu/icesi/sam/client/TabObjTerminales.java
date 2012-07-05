@@ -2,8 +2,12 @@ package co.edu.icesi.sam.client;
 
 import co.edu.icesi.sam.client.competencias.CompetenciasService;
 import co.edu.icesi.sam.client.competencias.CompetenciasServiceAsync;
+import co.edu.icesi.sam.client.dialogos.DialogoCrearObjetivoTerminal;
+import co.edu.icesi.sam.client.dialogos.DialogoEditarObjetivoTerminal;
 import co.edu.icesi.sam.client.multilingual.*;
 
+import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.TabItem;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
@@ -16,16 +20,19 @@ import com.extjs.gxt.ui.client.widget.table.TableColumnModel;
 import com.extjs.gxt.ui.client.widget.table.TableColumn;
 import com.google.gwt.core.client.GWT;
 
-public class PanelObjetivosTerminales extends TabItem
+public class TabObjTerminales extends TabItem
 {
     private final static MultiLingualConstants MultiLingualConstants = GWT.create( MultiLingualConstants.class );
     private final CompetenciasServiceAsync competenciasService = GWT.create( CompetenciasService.class );
    
+    private DialogoCrearObjetivoTerminal dialogoAgregarObjTerminal;
+    private DialogoEditarObjetivoTerminal dialogoEditarObjTerminal;
+    
     private Text labObjGeneral;
     private TextArea txtObjGeneral;
     private Button btnAgregar;
     
-    public PanelObjetivosTerminales( )
+    public TabObjTerminales( )
     {
         setText( MultiLingualConstants.tabObjTerminales_text( ) );
         setSize( 800, 600 );
@@ -35,7 +42,7 @@ public class PanelObjetivosTerminales extends TabItem
         labObjGeneral = new Text( MultiLingualConstants.labObjGeneral_text( ) );
         container.add( labObjGeneral, new AbsoluteData( 36, 6 ) );
 
-        TextArea txtObjGeneral = new TextArea( );
+        txtObjGeneral = new TextArea( );
         txtObjGeneral.setSize( "380px", "60px" );       
         container.add( txtObjGeneral, new AbsoluteData( 36, 30 ) );
 
@@ -47,5 +54,27 @@ public class PanelObjetivosTerminales extends TabItem
         table.setSize( "376px", "146px" );
 
         add( container );
+    }
+    
+    public void inicializarDialogos()
+    {
+        dialogoAgregarObjTerminal = new DialogoCrearObjetivoTerminal( );
+    }
+    
+    public void eventoAgregarObjTerminal()
+    {
+        btnAgregar.addSelectionListener( new SelectionListener<ButtonEvent>( )
+        {            
+            @Override
+            public void componentSelected( ButtonEvent ce )
+            {                
+                habilitarDialogoAgregarObjTerminal();
+            }
+        } );
+    }
+    
+    private void habilitarDialogoAgregarObjTerminal()
+    {
+        dialogoAgregarObjTerminal.show( );   
     }
 }
