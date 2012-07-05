@@ -42,9 +42,11 @@ public class SAM_WAR implements EntryPoint
 
         TabPanel tabs = new TabPanel( );
         tabs.setSize( 800, 600 );
+        tabs.disable( );
+        Registry.register( "tabs", tabs );
         
-        Table table = new Table(new TableColumnModel(new TableColumn("id.1", "Código", 0.3f), new TableColumn("id.2", "Cursos", 0.7f)));
-        RootPanel.get("listadoCursos").add( table );
+        PanelCursos panelCursos = new PanelCursos( );
+        Registry.register( "panelCursos", panelCursos );
         
         TabObjGeneral tabObjGeneral = new TabObjGeneral( );        
         Registry.register( "tabObjGeneral", tabObjGeneral );
@@ -52,8 +54,9 @@ public class SAM_WAR implements EntryPoint
         TabObjTerminales tabObjTerminales = new TabObjTerminales( );
         Registry.register( "tabObjTerminales", tabObjTerminales );
 
-        tabs.add( tabObjTerminales );
         tabs.add( tabObjGeneral );
+        tabs.add( tabObjTerminales );
+        RootPanel.get("listadoCursos").add( panelCursos );        
         RootPanel.get("tabs").add( tabs );
     }
 }

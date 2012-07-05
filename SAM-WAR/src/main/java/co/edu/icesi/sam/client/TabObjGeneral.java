@@ -93,19 +93,21 @@ public class TabObjGeneral extends TabItem
     {
         ObjetivoGeneralBO objGeneral = new ObjetivoGeneralBO( );
         objGeneral.setContenido( txtObjGeneral.getValue( ) );
-
+        objGeneral.setIdCurso( (Integer) Registry.get( "idCurso" ));
+        
         competenciasService.agregarObjGeneral( objGeneral, new AsyncCallback<Integer>( )
         {
             @Override
             public void onSuccess( Integer result )
             {
-                Dispatcher.forwardEvent( DTEvent.AGREGAR_OBJ_GENERAL, result );
+                Dispatcher.forwardEvent( DTEvent.ACTUALIZAR_OBJ_GENERAL );
+                Info.display( "SAM", Mensajero.mostrarMensaje( result ));
             }
 
             @Override
             public void onFailure( Throwable caught )
             {
-                // TODO Auto-generated method stub
+                Info.display("Error",Mensajero.ON_FAILURE);
             }
         } );
     }
@@ -122,14 +124,13 @@ public class TabObjGeneral extends TabItem
             @Override
             public void onSuccess( Integer result )
             {
-                Info.display( "Prueba", "Edición exitosa" );               
-                Dispatcher.forwardEvent( DTEvent.EDITAR_OBJ_GENERAL, result );
+                Info.display( "SAM", Mensajero.mostrarMensaje( result ) );                               
             }
 
             @Override
             public void onFailure( Throwable caught )
             {
-                // TODO Auto-generated method stub
+                Info.display( "Error", Mensajero.ON_FAILURE );
             }
         } );
     }
@@ -150,13 +151,14 @@ public class TabObjGeneral extends TabItem
                 else
                 {
                     btnGuardar.setText( MultiLingualConstants.btnAgregar_text( ) );
+                    txtObjGeneral.clear( );
                 }
             }
 
             @Override
             public void onFailure( Throwable caught )
             {
-                // TODO Auto-generated method stub
+                Info.display( "Error", Mensajero.ON_FAILURE );
             }
         } );
     }

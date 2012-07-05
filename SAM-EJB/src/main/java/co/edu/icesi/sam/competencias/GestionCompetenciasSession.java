@@ -168,6 +168,7 @@ public class GestionCompetenciasSession implements GestionCompetenciasSessionRem
         try
         {
             Curso curso = em.find( Curso.class, idCurso );
+            em.refresh( curso );
             ObjetivoGeneralBO bo = new ObjetivoGeneralBO( );
 
             bo.setId( curso.getObjetivosGenerales( ).get( 0 ).getId( ) );

@@ -5,9 +5,17 @@ import com.google.gwt.i18n.client.Constants;
 public interface MultiLingualConstants extends Constants
 {
     String onFailure();
+    String msgAgregar();
+    String msgEditar();
+    String msgEliminar();
+    String msgError();
     
     String btnAgregar_text();
     String btnEditar_text();
+    
+    String tableCursos_heading();
+    String columnCursos_nombre();
+    String columnCursos_codigo();
     
     String labNombre_text();
     String labContenido_text();

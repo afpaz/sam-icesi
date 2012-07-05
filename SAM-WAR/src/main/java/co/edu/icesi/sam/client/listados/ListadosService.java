@@ -17,7 +17,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
-@RemoteServiceRelativePath("listadosService")
+@RemoteServiceRelativePath("ListadosService")
 public interface ListadosService extends RemoteService
 {
     public List<MaterialBO> listarMaterialesPorCurso(int idCurso);

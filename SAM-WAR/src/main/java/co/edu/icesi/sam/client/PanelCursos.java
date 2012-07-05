@@ -5,111 +5,114 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import co.edu.icesi.sam.bo.CursoBO;
+import co.edu.icesi.sam.client.controller.DTEvent;
+import co.edu.icesi.sam.client.curso.CursoService;
+import co.edu.icesi.sam.client.curso.CursoServiceAsync;
 import co.edu.icesi.sam.client.model.CursoModel;
+import co.edu.icesi.sam.client.multilingual.MultiLingualConstants;
+
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.data.BaseModel;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.GridEvent;
 import com.extjs.gxt.ui.client.event.Listener;
+import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.store.ListStore;
 import com.extjs.gxt.ui.client.widget.ContentPanel;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.LayoutContainer;
 import com.extjs.gxt.ui.client.widget.grid.ColumnConfig;
 import com.extjs.gxt.ui.client.widget.grid.ColumnModel;
 import com.extjs.gxt.ui.client.widget.grid.Grid;
 import com.extjs.gxt.ui.client.widget.layout.FitLayout;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 
-public class PanelCursos extends LayoutContainer {
+public class PanelCursos extends LayoutContainer
+{
 
-	private Grid<CursoModel> grid;
-	private String[] datosNombresColumnas;
-	public PanelCursos(){
+    private final static MultiLingualConstants MultiLingualConstants = GWT.create( MultiLingualConstants.class );
+    private final CursoServiceAsync cursoService = GWT.create( CursoService.class );
 
-		List<ColumnConfig> configs = new ArrayList<ColumnConfig>();  
+    private Grid<CursoModel> grid;
+    private String[] datosNombresColumnas;
 
-		ColumnConfig column = new ColumnConfig();    
-		column.setId("id");    
-		column.setHeader("Identificacion");    
-		column.setWidth(200);    
-		configs.add(column);  
+    public PanelCursos( )
+    {
+        grid = new Grid<CursoModel>( new ListStore<CursoModel>( ), getColumnModel( ) );
+        grid.setBorders( true );
+        grid.setStripeRows( true );
 
-		column = new ColumnConfig("nombre", "Nombre", 150);    
-		column.setAlignment(HorizontalAlignment.LEFT);    
-		configs.add(column);  
+        ContentPanel cp = new ContentPanel( );
+        cp.setBodyBorder( false );
+        cp.setHeading( MultiLingualConstants.tableCursos_heading( ) );
+        cp.setButtonAlign( HorizontalAlignment.CENTER );
+        cp.setLayout( new FitLayout( ) );
+        cp.setSize( 310, 600 );
+        cp.add( grid );
 
-		column = new ColumnConfig("codigo", "Codigo", 150);    
-		column.setAlignment(HorizontalAlignment.LEFT);    
-		configs.add(column);  
+        add( cp );
 
+        cargarCursos( );
+        eventoSeleccionarCurso( );
+    }
 
+    private void cargarCursos( )
+    {       
+        cursoService.listarCursos( new AsyncCallback<List<CursoBO>>( )
+        {            
+            @Override
+            public void onSuccess( List<CursoBO> result )
+            {
+                Dispatcher.forwardEvent( DTEvent.ACTUALIZAR_LISTADO_CURSOS, result );                
+            }
+            
+            @Override
+            public void onFailure( Throwable caught )
+            {
+                Info.display( "Error", Mensajero.ON_FAILURE);                
+            }
+        } );
+    }
 
+    public void eventoSeleccionarCurso( )
+    {
+        grid.addListener( Events.OnClick, new Listener<GridEvent<BaseModel>>( )
+        {
+            public void handleEvent( GridEvent<BaseModel> be )
+            {
+                CursoModel cursoModel = (CursoModel) be.getGrid( ).getSelectionModel( ).getSelectedItem( );
+                Dispatcher.forwardEvent( DTEvent.SELECCIONAR_CURSO, cursoModel );
+            }
+        } );
 
-		ListStore<CursoModel> employeeList = new ListStore<CursoModel>();    
-		//employeeList.add(TestData.getEmployees()); 
+    }
 
+    public void actualizarPanel( ListStore<CursoModel> listaCursos)
+    {
+        grid.reconfigure( listaCursos, getColumnModel( ) );
+    }
 
-		ColumnModel cm = new ColumnModel(configs);  
-		grid = new Grid<CursoModel>(employeeList, cm);   
-		grid.setStyleAttribute("borderTop", "none");   
-		grid.setAutoExpandColumn("name");   
-		grid.setBorders(true);   
-		grid.setStripeRows(true); 
+    private ColumnModel getColumnModel( )
+    {
+        List<ColumnConfig> configs = new ArrayList<ColumnConfig>( );
 
-		ContentPanel cp = new ContentPanel();    
-		cp.setBodyBorder(false);    
-		cp.setHeading("Lista de Cursos:");    
-		cp.setButtonAlign(HorizontalAlignment.CENTER);    
-		cp.setLayout(new FitLayout());    
-		cp.setSize(700, 300);   
-		cp.add(grid);    
-		RootPanel.get().add(cp);
+        ColumnConfig column = new ColumnConfig( "id", 10 );
+        column.setHidden( true );
+        configs.add( column );
 
-		//		ListStore<Employee> employeeList2 = employeeList;
-		//		DateTimeFormat f = DateTimeFormat.getFormat("yyyy-mm-dd");  
-		//		employeeList2.add(new Employee("Diego Rojas","General Administration","Executive Director",150000,f.parse("2006-05-01")));
-		//
-		//		grid.reconfigure(employeeList2, cm);
-		//RootPanel.get().add(grid);
+        column = new ColumnConfig( "codigo", MultiLingualConstants.columnCursos_codigo( ), 50 );
+        column.setAlignment( HorizontalAlignment.CENTER );
+        configs.add( column );
 
-		cargarCursos();
-		eventos() ;
-	}
+        column = new ColumnConfig( "nombre", MultiLingualConstants.columnCursos_nombre( ), 250 );
+        column.setAlignment( HorizontalAlignment.LEFT );
+        configs.add( column );
 
-	private void cargarCursos() {
-		//Aqui se debe hacer el ASyn que devuelva la lista de cursos y llame al metodo actualizarPanel
-		
-	}
-
-	public void eventos(){
-
-
-		grid.addListener(Events.OnClick, new Listener<GridEvent<BaseModel>>() {
-			public void handleEvent(GridEvent<BaseModel> be) {
-
-
-				if(be.getGrid().getSelectionModel().getSelectedItem() != null)
-				{
-					Map<String, Object> d = be.getGrid().getSelectionModel().getSelectedItem().getProperties();
-					datosNombresColumnas = new String[d.size()]; 
-					Set<String> id_columnas = d.keySet();
-					Iterator<String> iter  = id_columnas.iterator();
-					int i =0;
-					while(iter.hasNext())
-						datosNombresColumnas[i++]= iter.next();
-					for(String x : datosNombresColumnas)
-						System.out.println("x - " + x);
-				}
-			}
-		});
-
-	}
-
-	public void actualizarPanel(ListStore<CursoModel> listaCursos, ColumnModel cm){
-
-		grid.reconfigure(listaCursos, cm);
-		RootPanel.get().add(grid);
-
-	}
+        return new ColumnModel( configs );
+    }
 
 }

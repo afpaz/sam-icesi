@@ -5,7 +5,9 @@ import java.util.List;
 import co.edu.icesi.sam.bo.CursoBO;
 
 import com.google.gwt.user.client.rpc.RemoteService;
+import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+@RemoteServiceRelativePath("CursoService")
 public interface CursoService extends RemoteService
 {
     public int agregarCurso(CursoBO curso);

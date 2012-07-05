@@ -19,5 +19,21 @@
   	<servlet-name>CompetenciasService</servlet-name>
   	<url-pattern>/sam_war/CompetenciasService</url-pattern>
   </servlet-mapping>
+    <servlet>
+  	<servlet-name>CursoService</servlet-name>
+  	<servlet-class>co.edu.icesi.sam.server.CursoServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CursoService</servlet-name>
+  	<url-pattern>/sam_war/CursoService</url-pattern>
+  </servlet-mapping>  
+    <servlet>
+  	<servlet-name>ListadosService</servlet-name>
+  	<servlet-class>co.edu.icesi.sam.server.ListadosServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>ListadosService</servlet-name>
+  	<url-pattern>/sam_war/ListadosService</url-pattern>
+  </servlet-mapping> 
 
 </web-app>
