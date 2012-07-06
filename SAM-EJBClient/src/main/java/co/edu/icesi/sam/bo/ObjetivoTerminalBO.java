@@ -3,6 +3,8 @@ package co.edu.icesi.sam.bo;
 import java.io.Serializable;
 import java.util.List;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 public class ObjetivoTerminalBO implements Serializable
 {
     private int id;

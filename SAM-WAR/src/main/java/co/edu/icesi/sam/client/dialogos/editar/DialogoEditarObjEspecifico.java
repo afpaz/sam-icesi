@@ -1,16 +1,25 @@
-package co.edu.icesi.sam.client.dialogos;
+package co.edu.icesi.sam.client.dialogos.editar;
 
+import co.edu.icesi.sam.bo.ObjetivoEspecificoBO;
 import co.edu.icesi.sam.bo.ObjetivoTerminalBO;
+import co.edu.icesi.sam.client.Mensajero;
 import co.edu.icesi.sam.client.competencias.CompetenciasService;
 import co.edu.icesi.sam.client.competencias.CompetenciasServiceAsync;
 import co.edu.icesi.sam.client.controller.DTEvent;
+import co.edu.icesi.sam.client.model.ObjetivoEspecificoModel;
+import co.edu.icesi.sam.client.model.ObjetivoTerminalModel;
 import co.edu.icesi.sam.client.multilingual.MultiLingualConstants;
+import co.edu.icesi.sam.client.tabs.TabObjEspecificos;
 
 import com.extjs.gxt.ui.client.Style.Orientation;
+import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.ButtonEvent;
+import com.extjs.gxt.ui.client.event.Events;
+import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.event.SelectionListener;
 import com.extjs.gxt.ui.client.mvc.Dispatcher;
 import com.extjs.gxt.ui.client.widget.Dialog;
+import com.extjs.gxt.ui.client.widget.Info;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
 import com.extjs.gxt.ui.client.widget.layout.AbsoluteLayout;
 import com.extjs.gxt.ui.client.widget.button.Button;
@@ -22,90 +31,87 @@ import com.extjs.gxt.ui.client.widget.Text;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-public class DialogoEditarObjetivoTerminal extends Dialog {
-
+public class DialogoEditarObjEspecifico extends Dialog
+{
     private final static MultiLingualConstants MultiLingualConstants = GWT.create( MultiLingualConstants.class );
-    private final CompetenciasServiceAsync competenciasService = GWT.create( CompetenciasService.class );
     
-    private int idObjTerminal;
+    private TabObjEspecificos tabObjEspecificos;
+
     private Text labNombre;
     private Text labContenido;
     private TextField<String> txtNombre;
     private TextArea txtContenido;
-    private Button btnEditar;
-        
-    public DialogoEditarObjetivoTerminal()
-    {
-        setModal( true );
-        setHeading( MultiLingualConstants.dialogoAgregarObjTerminal_heading( ) );
-        setLayout( new AbsoluteLayout( ) );
 
-        btnEditar = new Button( MultiLingualConstants.btnAgregar_text( ) );
-        add( btnEditar, new AbsoluteData( 238, 138 ) );
+    public DialogoEditarObjEspecifico( TabObjEspecificos tabObjEspecificos )
+    {
+        this.tabObjEspecificos = tabObjEspecificos;
+
+        setModal( true );
+        setSize( 500, 300 );
+        setHeading( MultiLingualConstants.dialogoEditarObjEspecifico_heading( ) );
+        setLayout( new AbsoluteLayout( ) );
 
         txtNombre = new TextField<String>( );
         add( txtNombre, new AbsoluteData( 157, 25 ) );
-        txtNombre.setSize( "212px", "24px" );    
+        txtNombre.setSize( "212px", "24px" );
 
         txtContenido = new TextArea( );
         add( txtContenido, new AbsoluteData( 157, 72 ) );
-        txtContenido.setSize( "212px", "60px" );
+        txtContenido.setSize( "212px", "100px" );
 
         labNombre = new Text( MultiLingualConstants.labNombre_text( ) );
         add( labNombre, new AbsoluteData( 30, 36 ) );
 
         labContenido = new Text( MultiLingualConstants.labContenido_text( ) );
         add( labContenido, new AbsoluteData( 30, 72 ) );
+
+        eventoEditarObjEspecifico( );
     }
-    
-    public void eventoAgregarObjTerminal()
+
+    private void eventoEditarObjEspecifico( )
     {
-        btnEditar.addSelectionListener( new SelectionListener<ButtonEvent>( )
+        getButtonById( OK ).addSelectionListener( new SelectionListener<ButtonEvent>( )
         {
-            
             @Override
             public void componentSelected( ButtonEvent ce )
             {
-                editarObjTerminal();                
-            }
-        } );
-    }       
-    
-    private void editarObjTerminal( )
-    {   
-        ObjetivoTerminalBO objTerminal = new ObjetivoTerminalBO( );
-        objTerminal.setNombre( txtNombre.getValue( ) );
-        objTerminal.setContenido( txtContenido.getValue( ) );
-        objTerminal.setId( idObjTerminal );
-        
-        competenciasService.agregarObjTerminal( objTerminal, new AsyncCallback<Integer>( )
-        {            
-            @Override
-            public void onSuccess( Integer result )
-            {           
-                limpiarDatos( );          
-                Dispatcher.forwardEvent( DTEvent.EDITAR_OBJ_TERMINAL, result );
-            }
-            
-            @Override
-            public void onFailure( Throwable caught )
-            {
-                // TODO Auto-generated method stub                
+                editarObjEspecifico( );
+                limpiarDatos( );
             }
         } );
     }
-    
-    public void cargarDatos(ObjetivoTerminalBO objTerminal)
+
+    private void eventoCerrarVentana( )
     {
-        txtNombre.setValue( objTerminal.getNombre( ) );
-        txtContenido.setValue( objTerminal.getContenido( ) );
-        idObjTerminal = objTerminal.getId( );
+        this.addListener( Events.Close, new Listener<BaseEvent>( )
+        {
+            @Override
+            public void handleEvent( BaseEvent be )
+            {
+                limpiarDatos( );
+            }
+        } );
     }
-    
-    private void limpiarDatos()
+
+    private void editarObjEspecifico( )
+    {
+        String nombre = txtNombre.getValue( );
+        String contenido = txtContenido.getValue( );
+        
+        tabObjEspecificos.editarObjEspecifico( nombre, contenido );
+    }
+
+    public void cargarDatos( ObjetivoEspecificoModel objEspecifico )
+    {
+        txtNombre.setValue( objEspecifico.getNombre( ) );
+        txtContenido.setValue( objEspecifico.getContenido( ) );
+        show( );
+    }
+
+    private void limpiarDatos( )
     {
         txtNombre.clear( );
         txtContenido.clear( );
-        hide();
+        hide( );
     }
 }

@@ -35,5 +35,12 @@
   	<servlet-name>ListadosService</servlet-name>
   	<url-pattern>/sam_war/ListadosService</url-pattern>
   </servlet-mapping> 
-
+    <servlet>
+  	<servlet-name>PlanificadorService</servlet-name>
+  	<servlet-class>co.edu.icesi.sam.server.PlanificadorServiceImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>PlanificadorService</servlet-name>
+  	<url-pattern>/sam_war/PlanificadorService</url-pattern>
+  </servlet-mapping>
 </web-app>

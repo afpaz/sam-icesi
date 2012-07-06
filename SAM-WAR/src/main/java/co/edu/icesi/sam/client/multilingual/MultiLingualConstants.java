@@ -9,17 +9,16 @@ public interface MultiLingualConstants extends Constants
     String msgAgregar( );
     String msgEditar( );
     String msgEliminar( );
-    String msgError( );
-
-    // Botones
-    String btnAgregar_text( );
-    String btnEditar_text( );
+    String msgError( );    
 
     // PanelCursos
     String tableCursos_heading( );
     String columnCursos_nombre( );
     String columnCursos_codigo( );
 
+    //Botones
+    String btnAgregar_text();
+    String btnEditar_text();
     // Labels Objetivos
     String labNombre_text( );
     String labContenido_text( );
@@ -30,8 +29,14 @@ public interface MultiLingualConstants extends Constants
 
     // TabObjTerminal
     String tabObjTerminales_text( );
+    
+    String tableObjTerminales_heading();
+    String columnObjTerminales_nombre();
+    String columnObjTerminales_contenido();
 
     // TabObjEspeficicos
+    String tabObjEspecificos_text();
+    
     String tableMetasTerminales_heading( );
     String columnMetasTerminales_nombreUnidad( );
     String columnMetasTerminales_contenidoUnidad( );
@@ -42,6 +47,27 @@ public interface MultiLingualConstants extends Constants
     String columnObjEspecificos_nombre();
     String columnObjEspecificos_contenido();
 
+    String msgSeleccionarMetaTerminal();
+    String msgMetaTerminal();
+    
+    // TabMateriales
+    String tabMateriales_text();
+    
+    String listMateriales_heading(); 
+    
     // DialogoAgregarObjTerminal
-    String dialogoAgregarObjTerminal_heading( );
+    String dialogoAgregarObjTerminal_heading( );   
+    // DialogoEditarObjTerminal
+    String dialogoEditarObjTerminal_heading( );
+    
+    // DialogoAgregarObjEspecifico
+    String dialogoAgregarObjEspecifico_heading( );    
+    // DialogoEditarObjEspecifico
+    String dialogoEditarObjEspecifico_heading( );
+    
+    // DialogoAgregarMaterial
+    String dialogoAgregarMaterial_heading( );
+    
+    // DialogoEditarMaterial
+    String dialogoEditarMaterial_heading( );
 }

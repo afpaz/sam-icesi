@@ -2,7 +2,9 @@ package co.edu.icesi.sam.bo;
 
 import java.io.Serializable;
 
-public class ObjetivoGeneralBO implements Serializable
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class ObjetivoGeneralBO implements IsSerializable
 {
     private int id;
     private String contenido;

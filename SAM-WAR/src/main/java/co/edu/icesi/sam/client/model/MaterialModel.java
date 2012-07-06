@@ -3,6 +3,8 @@ package co.edu.icesi.sam.client.model;
 import java.io.Serializable;
 import java.util.List;
 
+import co.edu.icesi.sam.bo.MaterialBO;
+
 import com.extjs.gxt.ui.client.data.BaseModel;
 
 public class MaterialModel extends BaseModel implements Serializable
@@ -36,5 +38,14 @@ public class MaterialModel extends BaseModel implements Serializable
     public void setNombre( String nombre )
     {
        set("nombre", nombre);
+    }
+
+    public static MaterialModel toModelFromBO( MaterialBO bo )
+    {
+        MaterialModel mModel = new MaterialModel( );
+        mModel.set( "id", bo.getId( ) );
+        mModel.set( "nombre", bo.getNombre( ) );
+        
+        return mModel;
     }   
 }

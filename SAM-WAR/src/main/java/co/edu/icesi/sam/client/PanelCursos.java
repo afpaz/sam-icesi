@@ -66,7 +66,7 @@ public class PanelCursos extends LayoutContainer
             @Override
             public void onSuccess( List<CursoBO> result )
             {
-                Dispatcher.forwardEvent( DTEvent.ACTUALIZAR_LISTADO_CURSOS, result );                
+                Dispatcher.forwardEvent( DTEvent.LISTAR_CURSOS, result );                
             }
             
             @Override
@@ -79,11 +79,11 @@ public class PanelCursos extends LayoutContainer
 
     private void eventoSeleccionarCurso( )
     {
-        gridCursos.addListener( Events.OnClick, new Listener<GridEvent<BaseModel>>( )
+        gridCursos.addListener( Events.CellClick, new Listener<GridEvent<CursoModel>>( )
         {
-            public void handleEvent( GridEvent<BaseModel> be )
+            public void handleEvent( GridEvent<CursoModel> e )
             {
-                CursoModel cursoModel = (CursoModel) be.getGrid( ).getSelectionModel( ).getSelectedItem( );
+                CursoModel cursoModel = e.getGrid( ).getSelectionModel( ).getSelectedItem( );
                 Dispatcher.forwardEvent( DTEvent.SELECCIONAR_CURSO, cursoModel );
             }
         } );

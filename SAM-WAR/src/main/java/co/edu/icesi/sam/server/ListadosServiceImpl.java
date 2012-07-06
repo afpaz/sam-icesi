@@ -32,7 +32,7 @@ public class ListadosServiceImpl extends RemoteServiceServlet implements Listado
         try
         {
             context = new InitialContext( );
-            listadosService = (GestionListadosSessionRemote) context.lookup( "listados" );
+            listadosService = (GestionListadosSessionRemote) context.lookup( "gestionListados" );
         }
         catch( NamingException e )
         {

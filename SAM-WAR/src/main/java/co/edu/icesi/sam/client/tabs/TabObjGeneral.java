@@ -1,6 +1,7 @@
-package co.edu.icesi.sam.client;
+package co.edu.icesi.sam.client.tabs;
 
 import co.edu.icesi.sam.bo.ObjetivoGeneralBO;
+import co.edu.icesi.sam.client.Mensajero;
 import co.edu.icesi.sam.client.competencias.CompetenciasService;
 import co.edu.icesi.sam.client.competencias.CompetenciasServiceAsync;
 import co.edu.icesi.sam.client.controller.DTEvent;
@@ -39,29 +40,29 @@ public class TabObjGeneral extends TabItem
     public TabObjGeneral( )
     {
         setText( MultiLingualConstants.tabObjGeneral_text( ) );
-        setSize( 800, 600);
-        
+        setSize( 800, 600 );
+
         LayoutContainer container = new LayoutContainer( );
-        container.setLayout( new AbsoluteLayout( ) );     
+        container.setLayout( new AbsoluteLayout( ) );
 
         txtObjGeneral = new TextArea( );
-        txtObjGeneral.setSize( "342px", "125px" );
-        container.add( txtObjGeneral, new AbsoluteData( 52, 52 ) );
+        txtObjGeneral.setSize( "600px", "150px" );
+        container.add( txtObjGeneral, new AbsoluteData( 100, 50 ) );
 
         labObjGeneral = new Text( MultiLingualConstants.labObjGeneral_text( ) );
-        container.add( labObjGeneral, new AbsoluteData( 52, 28 ) );
+        container.add( labObjGeneral, new AbsoluteData(100, 30 ) );
 
         btnGuardar = new Button( MultiLingualConstants.btnAgregar_text( ) );
-        container.add( btnGuardar, new AbsoluteData( 194, 183 ) );
-       
-        add(container);
-                
+        container.add( btnGuardar, new AbsoluteData( 375, 210 ) );
+
+        add( container );
+
         eventoCargarTab( );
         eventoAgregarObjGeneral( );
         eventoEditarObjGeneral( );
-    }  
-    
-    private void eventoCargarTab()
+    }
+
+    private void eventoCargarTab( )
     {
         this.addListener( Events.Select, new Listener<BaseEvent>( )
         {
@@ -70,10 +71,9 @@ public class TabObjGeneral extends TabItem
             {
                 Dispatcher.forwardEvent( DTEvent.ACTUALIZAR_OBJ_GENERAL );
             }
-            
         } );
     }
-    
+
     private void eventoAgregarObjGeneral( )
     {
         btnGuardar.addSelectionListener( new SelectionListener<ButtonEvent>( )
@@ -82,7 +82,7 @@ public class TabObjGeneral extends TabItem
             @Override
             public void componentSelected( ButtonEvent ce )
             {
-                if( btnGuardar.getText( ).equals( MultiLingualConstants.btnAgregar_text( )) )
+                if( btnGuardar.getText( ).equals( MultiLingualConstants.btnAgregar_text( ) ) )
                 {
                     agregarObjGeneral( );
                 }
@@ -110,21 +110,21 @@ public class TabObjGeneral extends TabItem
     {
         ObjetivoGeneralBO objGeneral = new ObjetivoGeneralBO( );
         objGeneral.setContenido( txtObjGeneral.getValue( ) );
-        objGeneral.setIdCurso( (Integer) Registry.get( "idCurso" ));
-        
+        objGeneral.setIdCurso( ( Integer )Registry.get( "idCurso" ) );
+
         competenciasService.agregarObjGeneral( objGeneral, new AsyncCallback<Integer>( )
         {
             @Override
             public void onSuccess( Integer result )
             {
                 Dispatcher.forwardEvent( DTEvent.ACTUALIZAR_OBJ_GENERAL );
-                Info.display( "SAM", Mensajero.mostrarMensaje( result ));
+                Info.display( "SAM", Mensajero.mostrarMensaje( result ) );
             }
 
             @Override
             public void onFailure( Throwable caught )
             {
-                Info.display("Error",Mensajero.ON_FAILURE);
+                Info.display( "Error", Mensajero.ON_FAILURE );
             }
         } );
     }
@@ -141,7 +141,7 @@ public class TabObjGeneral extends TabItem
             @Override
             public void onSuccess( Integer result )
             {
-                Info.display( "SAM", Mensajero.mostrarMensaje( result ) );                               
+                Info.display( "SAM", Mensajero.mostrarMensaje( result ) );
             }
 
             @Override
@@ -154,29 +154,33 @@ public class TabObjGeneral extends TabItem
 
     public void asignarObjGeneral( )
     {
-        competenciasService.buscarObjGeneral( ( Integer )Registry.get( "idCurso" ), new AsyncCallback<ObjetivoGeneralBO>( )
+        if( Registry.get( "idCurso" ) != null )
         {
-            @Override
-            public void onSuccess( ObjetivoGeneralBO objGeneral )
+            int idCurso = Registry.get( "idCurso" );
+            competenciasService.buscarObjGeneral( idCurso, new AsyncCallback<ObjetivoGeneralBO>( )
             {
-                if( objGeneral != null )
+                @Override
+                public void onSuccess( ObjetivoGeneralBO objGeneral )
                 {
-                    txtObjGeneral.setValue( objGeneral.getContenido( ) );
-                    idObjGeneral = objGeneral.getId( );
-                    btnGuardar.setText( MultiLingualConstants.btnEditar_text( ) );
+                    if( objGeneral != null )
+                    {
+                        txtObjGeneral.setValue( objGeneral.getContenido( ) );
+                        idObjGeneral = objGeneral.getId( );
+                        btnGuardar.setText( MultiLingualConstants.btnEditar_text( ) );
+                    }
+                    else
+                    {
+                        btnGuardar.setText( MultiLingualConstants.btnAgregar_text( ) );
+                        txtObjGeneral.clear( );
+                    }
                 }
-                else
-                {
-                    btnGuardar.setText( MultiLingualConstants.btnAgregar_text( ) );
-                    txtObjGeneral.clear( );
-                }
-            }
 
-            @Override
-            public void onFailure( Throwable caught )
-            {
-                Info.display( "Error", Mensajero.ON_FAILURE );
-            }
-        } );
+                @Override
+                public void onFailure( Throwable caught )
+                {
+                    Info.display( "Error", Mensajero.ON_FAILURE );
+                }
+            } );
+        }
     }
 }

@@ -2,6 +2,11 @@ package co.edu.icesi.sam.client;
 
 import javax.swing.ImageIcon;
 
+import co.edu.icesi.sam.client.tabs.TabMateriales;
+import co.edu.icesi.sam.client.tabs.TabObjEspecificos;
+import co.edu.icesi.sam.client.tabs.TabObjGeneral;
+import co.edu.icesi.sam.client.tabs.TabObjTerminales;
+
 import com.extjs.gxt.ui.client.Style.Orientation;
 import com.extjs.gxt.ui.client.widget.Window;
 import com.extjs.gxt.ui.client.widget.layout.RowLayout;
@@ -75,7 +80,7 @@ public class Ventana extends Window {
 		
 		TabItem tbtmNewTabitem_6 = new TabItem("Materiales del Curso");
 		tabPanel.add(tbtmNewTabitem_6);
-		PanelMateriales panelMateriales = new PanelMateriales( );
+		TabMateriales panelMateriales = new TabMateriales( );
 		tbtmNewTabitem_6.add(panelMateriales);
 		panelMateriales.setVisible( true );
 		

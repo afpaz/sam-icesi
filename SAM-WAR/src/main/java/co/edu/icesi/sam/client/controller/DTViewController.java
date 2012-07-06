@@ -4,14 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.edu.icesi.sam.bo.CursoBO;
+import co.edu.icesi.sam.bo.MaterialBO;
 import co.edu.icesi.sam.bo.MetaTerminalBO;
 import co.edu.icesi.sam.bo.ObjetivoEspecificoBO;
+import co.edu.icesi.sam.bo.ObjetivoTerminalBO;
 import co.edu.icesi.sam.client.PanelCursos;
-import co.edu.icesi.sam.client.TabObjEspecificos;
-import co.edu.icesi.sam.client.TabObjGeneral;
 import co.edu.icesi.sam.client.model.CursoModel;
+import co.edu.icesi.sam.client.model.MaterialModel;
 import co.edu.icesi.sam.client.model.MetaTerminalModel;
 import co.edu.icesi.sam.client.model.ObjetivoEspecificoModel;
+import co.edu.icesi.sam.client.model.ObjetivoTerminalModel;
+import co.edu.icesi.sam.client.tabs.TabMateriales;
+import co.edu.icesi.sam.client.tabs.TabObjEspecificos;
+import co.edu.icesi.sam.client.tabs.TabObjGeneral;
+import co.edu.icesi.sam.client.tabs.TabObjTerminales;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -23,48 +29,20 @@ public class DTViewController extends Controller
 {    
     public DTViewController( )
     {
-        registerEventTypes( DTEvent.ACTUALIZAR_LISTADO_CURSOS );
-        registerEventTypes( DTEvent.ACTUALIZAR_METAS_TERMINALES );
-        registerEventTypes( DTEvent.ACTUALIZAR_OBJ_GENERAL );
-        registerEventTypes( DTEvent.ACTUALIZAR_OBJ_ESPECIFICOS );        
-        registerEventTypes( DTEvent.AGREGAR_MATERIAL );
-        registerEventTypes( DTEvent.AGREGAR_META_TERMINAL );
-        registerEventTypes( DTEvent.AGREGAR_OBJ_ESPECIFICO );
-        registerEventTypes( DTEvent.AGREGAR_OBJ_TERMINAL );
-        registerEventTypes( DTEvent.AGREGAR_RECURSO );
-        registerEventTypes( DTEvent.AGREGAR_RECURSO_ASIGNADO );
-        registerEventTypes( DTEvent.AGREGAR_SABER );
-        registerEventTypes( DTEvent.AGREGAR_SESION );
-        registerEventTypes( DTEvent.AGREGAR_TRABAJO_ASIGNADO );
-        registerEventTypes( DTEvent.AGREGAR_UNIDAD );
-        registerEventTypes( DTEvent.EDITAR_MATERIAL );
-        registerEventTypes( DTEvent.EDITAR_OBJ_ESPECIFICO );    
-        registerEventTypes( DTEvent.EDITAR_OBJ_TERMINAL );
-        registerEventTypes( DTEvent.EDITAR_RECURSO_ASIGNADO );
-        registerEventTypes( DTEvent.EDITAR_SABER );
-        registerEventTypes( DTEvent.EDITAR_SESION );
-        registerEventTypes( DTEvent.EDITAR_TRABAJO_ASIGNADO );
-        registerEventTypes( DTEvent.EDITAR_UNIDAD );  
-        registerEventTypes( DTEvent.ELIMINAR_META_TERMINAL );
+        registerEventTypes( DTEvent.LISTAR_CURSOS );
+        registerEventTypes( DTEvent.ACTUALIZAR_OBJ_GENERAL ); 
+        registerEventTypes( DTEvent.LISTAR_MATERIALES );
+        registerEventTypes( DTEvent.LISTAR_METAS_TERMINALES );
+        registerEventTypes( DTEvent.LISTAR_OBJ_TERMINALES );
+        registerEventTypes( DTEvent.LISTAR_OBJ_ESPECIFICOS );
+        registerEventTypes( DTEvent.LISTAR_OBJ_ESPECIFICOS_POR_META_TERMINAL );
         registerEventTypes( DTEvent.SELECCIONAR_CURSO );
     }
     
     @Override
     public void handleEvent( AppEvent event )
     {
-        if(event.getType( ).equals( DTEvent.AGREGAR_MATERIAL ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_META_TERMINAL ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_OBJ_ESPECIFICO ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.ACTUALIZAR_LISTADO_CURSOS ))
+        if(event.getType( ).equals( DTEvent.LISTAR_CURSOS ))
         {
             List<CursoBO> cursos = (List<CursoBO>) event.getData( );
             ListStore<CursoModel> cursosModel = new ListStore<CursoModel>( );
@@ -77,7 +55,25 @@ public class DTViewController extends Controller
             PanelCursos panelCursos = Registry.get( "panelCursos" );
             panelCursos.actualizarPanel( cursosModel );
         }
-        else if(event.getType( ).equals( DTEvent.ACTUALIZAR_METAS_TERMINALES ))
+        else if(event.getType( ).equals( DTEvent.ACTUALIZAR_OBJ_GENERAL ))
+        {                     
+            TabObjGeneral tabObjGeneral = Registry.get( "tabObjGeneral" );
+            tabObjGeneral.asignarObjGeneral();
+        }   
+        else if(event.getType( ).equals( DTEvent.LISTAR_MATERIALES ))
+        {
+            List<MaterialBO> materiales = (List<MaterialBO>) event.getData( );
+            ListStore<MaterialModel> materialesModel = new ListStore<MaterialModel>( );
+            
+            for(MaterialBO bo : materiales)
+            {               
+                materialesModel.add( MaterialModel.toModelFromBO( bo ) );
+            }
+            
+            TabMateriales tabMateriales = Registry.get( "tabMateriales" );
+            tabMateriales.actualizarTablaMateriales( materialesModel );
+        }
+        else if(event.getType( ).equals( DTEvent.LISTAR_METAS_TERMINALES ))
         {
             List<MetaTerminalBO> metasTerminales = (List<MetaTerminalBO>) event.getData( );
             ListStore<MetaTerminalModel> metasModel = new ListStore<MetaTerminalModel>( );
@@ -90,7 +86,7 @@ public class DTViewController extends Controller
             TabObjEspecificos tabObjEspecificos = Registry.get( "tabObjEspecificos" );
             tabObjEspecificos.actualizarTablaMetasTerminales( metasModel );
         }
-        else if(event.getType( ).equals( DTEvent.ACTUALIZAR_OBJ_ESPECIFICOS ))
+        else if(event.getType( ).equals( DTEvent.LISTAR_OBJ_ESPECIFICOS ))
         {
             List<ObjetivoEspecificoBO> objEspecificos = (List<ObjetivoEspecificoBO>) event.getData( );
             ListStore<ObjetivoEspecificoModel> objModel = new ListStore<ObjetivoEspecificoModel>( );
@@ -103,78 +99,31 @@ public class DTViewController extends Controller
             TabObjEspecificos tabObjEspecificos = Registry.get( "tabObjEspecificos" );
             tabObjEspecificos.actualizarTablaObjEspecificos( objModel );
         }
-        else if(event.getType( ).equals( DTEvent.ACTUALIZAR_OBJ_GENERAL ))
-        {                     
-            TabObjGeneral tabObjGeneral = Registry.get( "tabObjGeneral" );
-            tabObjGeneral.asignarObjGeneral();
+        else if(event.getType( ).equals( DTEvent.LISTAR_OBJ_TERMINALES ))
+        {
+            List<ObjetivoTerminalBO> objTerminales = (List<ObjetivoTerminalBO>) event.getData( );
+            ListStore<ObjetivoTerminalModel> objModel = new ListStore<ObjetivoTerminalModel>( );
+            
+            for(ObjetivoTerminalBO bo : objTerminales)
+            {               
+                objModel.add( ObjetivoTerminalModel.toModelFromBO( bo ) );
+            }
+            
+            TabObjTerminales tabObjTerminales = Registry.get( "tabObjTerminales" );
+            tabObjTerminales.actualizarTablaObjTerminales( objModel );
         }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_META_TERMINAL ))
+        else if(event.getType( ).equals( DTEvent.LISTAR_OBJ_ESPECIFICOS_POR_META_TERMINAL ))
         {
+            List<ObjetivoEspecificoBO> objEspecificos = (List<ObjetivoEspecificoBO>) event.getData( );
+            ListStore<ObjetivoEspecificoModel> objModel = new ListStore<ObjetivoEspecificoModel>( );
             
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_OBJ_TERMINAL ))
-        {
+            for(ObjetivoEspecificoBO bo : objEspecificos)
+            {               
+                objModel.add( ObjetivoEspecificoModel.toModelFromBO( bo ) );
+            }
             
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_RECURSO ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_RECURSO_ASIGNADO ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_SABER ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_SESION ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_TRABAJO_ASIGNADO ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.AGREGAR_UNIDAD ))
-        {
-            
-        }
-        if(event.getType( ).equals( DTEvent.EDITAR_MATERIAL ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.EDITAR_OBJ_ESPECIFICO ))
-        {
-            
-        }    
-        else if(event.getType( ).equals( DTEvent.EDITAR_OBJ_TERMINAL ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.EDITAR_RECURSO_ASIGNADO ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.EDITAR_SABER ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.EDITAR_SESION ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.EDITAR_TRABAJO_ASIGNADO ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.EDITAR_UNIDAD ))
-        {
-            
-        }
-        else if(event.getType( ).equals( DTEvent.ELIMINAR_META_TERMINAL ))
-        {
-            
+            TabObjEspecificos tabObjEspecificos = Registry.get( "tabObjEspecificos" );
+            tabObjEspecificos.actualizarTablaObjEspecificos( objModel );
         }
         else if(event.getType( ).equals( DTEvent.SELECCIONAR_CURSO ))
         {
