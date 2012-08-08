@@ -58,19 +58,19 @@ public class TabObjEspecificos extends TabItem
 
     private DialogoAgregarObjEspecifico dialogoAgregarObjEspecifico;
     private DialogoEditarObjEspecifico dialogoEditarObjEspecifico;
-    
-    private int idMetaTerminal;    
+
+    private int idMetaTerminal;
     private int idObjEspecifico;
-    
+
     private Grid<ObjetivoEspecificoModel> gridObjEspecificos;
-    private Grid<MetaTerminalModel> gridMetasTerminales;  
+    private Grid<MetaTerminalModel> gridMetasTerminales;
     private Button btnAgregar;
 
     public TabObjEspecificos( )
     {
         setText( MultiLingualConstants.tabObjEspecificos_text( ) );
         setSize( 800, 600 );
-        
+
         LayoutContainer container = new LayoutContainer( );
         container.setLayout( new AbsoluteLayout( ) );
 
@@ -100,26 +100,26 @@ public class TabObjEspecificos extends TabItem
         cpObj.add( gridObjEspecificos );
 
         container.add( cpObj, new AbsoluteData( 100, 225 ) );
-        
+
         btnAgregar = new Button( MultiLingualConstants.btnAgregar_text( ) );
         container.add( btnAgregar, new AbsoluteData( 375, 510 ) );
 
         add( container );
-        
+
         inicializarDialogos( );
-        
+
         eventoCargarTab( );
         eventoSeleccionarMetaTerminal( );
         eventoAgregarObjEspecifico( );
         eventoEditarObjEspecifico( );
     }
-    
-    private void inicializarDialogos()
+
+    private void inicializarDialogos( )
     {
-        dialogoAgregarObjEspecifico = new DialogoAgregarObjEspecifico(this);
-        dialogoEditarObjEspecifico = new DialogoEditarObjEspecifico(this);
+        dialogoAgregarObjEspecifico = new DialogoAgregarObjEspecifico( this );
+        dialogoEditarObjEspecifico = new DialogoEditarObjEspecifico( this );
     }
-    
+
     private void eventoCargarTab( )
     {
         this.addListener( Events.Select, new Listener<BaseEvent>( )
@@ -127,6 +127,9 @@ public class TabObjEspecificos extends TabItem
             @Override
             public void handleEvent( BaseEvent be )
             {
+                idMetaTerminal = 0;
+                idObjEspecifico = 0;
+                
                 cargarMetasTerminales( );
                 cargarObjetivosEspecificos( );
             }
@@ -146,15 +149,15 @@ public class TabObjEspecificos extends TabItem
             }
         } );
     }
-    
-    private void eventoAgregarObjEspecifico()
+
+    private void eventoAgregarObjEspecifico( )
     {
         btnAgregar.addSelectionListener( new SelectionListener<ButtonEvent>( )
-        {            
+        {
             @Override
             public void componentSelected( ButtonEvent ce )
             {
-                if(idMetaTerminal != 0)
+                if( idMetaTerminal != 0 )
                 {
                     dialogoAgregarObjEspecifico.show( );
                 }
@@ -163,9 +166,9 @@ public class TabObjEspecificos extends TabItem
                     Info.display( "SAM", MultiLingualConstants.msgMetaTerminal( ) );
                 }
             }
-        });
+        } );
     }
-    
+
     private void eventoEditarObjEspecifico( )
     {
         gridObjEspecificos.addListener( Events.CellDoubleClick, new Listener<GridEvent<ObjetivoEspecificoModel>>( )
@@ -178,12 +181,12 @@ public class TabObjEspecificos extends TabItem
             }
         } );
     }
-    
-    public void agregarObjEspecifico(String nombre, String contenido)
+
+    public void agregarObjEspecifico( String nombre, String contenido )
     {
         ObjetivoEspecificoBO objEspecifico = new ObjetivoEspecificoBO( );
         objEspecifico.setNombre( nombre );
-        objEspecifico.setContenido(  contenido );
+        objEspecifico.setContenido( contenido );
         objEspecifico.setIdMetaTerminal( idMetaTerminal );
 
         competenciasService.agregarObjEspecifico( objEspecifico, new AsyncCallback<Integer>( )
@@ -202,31 +205,36 @@ public class TabObjEspecificos extends TabItem
             }
         } );
     }
-    
-    public void editarObjEspecifico(String nombre, String contenido)
+
+    public void editarObjEspecifico( String nombre, String contenido )
     {
         ObjetivoEspecificoBO objEspecifico = new ObjetivoEspecificoBO( );
+        objEspecifico.setId( idObjEspecifico );
         objEspecifico.setNombre( nombre );
         objEspecifico.setContenido( contenido );
-        objEspecifico.setId( idObjEspecifico );
-        
-        competenciasService.agregarObjEspecifico( objEspecifico, new AsyncCallback<Integer>( )
-        {            
+
+        competenciasService.editarObjEspecifico( objEspecifico, new AsyncCallback<Integer>( )
+        {
             @Override
             public void onSuccess( Integer result )
             {
-                cargarObjEspecificosPorMetaTerminal( );
-                Info.display( "SAM", Mensajero.mostrarMensaje( result ));
+
+                if( idMetaTerminal == 0 )
+                    cargarObjetivosEspecificos( );
+                else
+                    cargarObjEspecificosPorMetaTerminal( );
+                
+                Info.display( "SAM", Mensajero.mostrarMensaje( result ) );
             }
-            
+
             @Override
             public void onFailure( Throwable caught )
             {
-                Info.display( "Error", Mensajero.ON_FAILURE );                 
+                Info.display( "Error", Mensajero.ON_FAILURE );
             }
         } );
     }
-   private void cargarMetasTerminales( )
+    private void cargarMetasTerminales( )
     {
         int idCurso = Registry.get( "idCurso" );
         listadosService.listarMetasTerminalesPorCurso( idCurso, new AsyncCallback<List<MetaTerminalBO>>( )
@@ -264,8 +272,8 @@ public class TabObjEspecificos extends TabItem
 
         } );
     }
-    
-    private void cargarObjEspecificosPorMetaTerminal()
+
+    private void cargarObjEspecificosPorMetaTerminal( )
     {
         listadosService.listarObjEspecificosPorMetaTerminal( idMetaTerminal, new AsyncCallback<List<ObjetivoEspecificoBO>>( )
         {
@@ -273,17 +281,17 @@ public class TabObjEspecificos extends TabItem
             @Override
             public void onSuccess( List<ObjetivoEspecificoBO> result )
             {
-                Dispatcher.forwardEvent( DTEvent.LISTAR_OBJ_ESPECIFICOS_POR_META_TERMINAL, result );            
+                Dispatcher.forwardEvent( DTEvent.LISTAR_OBJ_ESPECIFICOS_POR_META_TERMINAL, result );
             }
-            
+
             @Override
             public void onFailure( Throwable caught )
-            {               
+            {
                 Info.display( "Error", Mensajero.ON_FAILURE );
             }
         } );
     }
-    
+
     public void actualizarTablaMetasTerminales( ListStore<MetaTerminalModel> metasTerminales )
     {
         gridMetasTerminales.reconfigure( metasTerminales, getColumnModelMetasTerminales( ) );

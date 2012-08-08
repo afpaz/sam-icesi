@@ -202,7 +202,31 @@ public class GestionListadosSession implements GestionListadosSessionRemote {
         
         return recursos;
     }
-
+    
+    @Override
+    public List<SaberBO> listarSaberesPorCurso(int idCurso)
+    {
+        String query = "SELECT DISTINCT(s) FROM Curso c, Unidad u, MetaTerminal mt, ObjetivoEspecifico oe, Saber s WHERE s.objetivosEspecifico = oe AND oe.metasTerminale = mt AND mt.unidade = u AND u.curso.id = :idCurso";
+        Query q = em.createQuery( query );
+        q.setParameter( "idCurso", idCurso );
+        List<Saber> saberes = q.getResultList( );
+        List<SaberBO> saberesBO = new ArrayList<SaberBO>( );
+        
+        for(Saber s : saberes)
+        {
+            SaberBO bo = new SaberBO( );
+            
+            bo.setId( s.getId( ) );
+            bo.setNombre( s.getNombre( ) );
+            bo.setContenido( s.getContenido( ) );
+            bo.setTipo( s.getTipo( ) );
+            
+            saberesBO.add(bo);
+        }
+        
+        return saberesBO;
+    }
+    
     @Override
     public List<SaberBO> listarSaberesPorObjetivoEspecifico( int idObjEspecifico )
     {

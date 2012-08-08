@@ -2,7 +2,9 @@ package co.edu.icesi.sam.bo;
 
 import java.io.Serializable;
 
-public class RecursoAsignadoBO implements Serializable
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public class RecursoAsignadoBO implements IsSerializable
 {
     private int id;
     private int idTrabajoAsignado;

@@ -24,6 +24,7 @@ public interface ListadosServiceAsync
     public void listarObjEspecificosPorUnidad(int idUnidad,AsyncCallback<List<ObjetivoEspecificoBO>> callback);
     public void listarObjTerminalesPorCurso(int idCurso, AsyncCallback<List<ObjetivoTerminalBO>> callback);
     public void listarRecursosPorSaber(int idSaber, AsyncCallback<List<RecursoBO>> callback);
+    public void listarSaberesPorCurso(int idCurso, AsyncCallback<List<SaberBO>> callback);
     public void listarSaberesPorObjetivoEspecifico(int idObjEspecifico, AsyncCallback<List<SaberBO>> callback);
     public void listarSesionesPorUnidad(int idUnidad, AsyncCallback<List<SesionBO>> callback);
     public void listarTrabajosAsignadosPorSesion(int idSesion, AsyncCallback<List<TrabajoAsignadoBO>> callback);

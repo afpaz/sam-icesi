@@ -73,7 +73,7 @@ public class TabObjTerminales extends TabItem
         container.add( labObjGeneral, new AbsoluteData( 100, 30 ) );
 
         txtObjGeneral = new TextArea( );
-        txtObjGeneral.setSize( "600px", "150px" );
+        txtObjGeneral.setSize( "600px", "150px" );      
         container.add( txtObjGeneral, new AbsoluteData( 100, 50 ) );
 
         btnAgregar = new Button( MultiLingualConstants.btnAgregar_text( ) );

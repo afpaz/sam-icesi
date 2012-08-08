@@ -8,16 +8,21 @@ import co.edu.icesi.sam.bo.MaterialBO;
 import co.edu.icesi.sam.bo.MetaTerminalBO;
 import co.edu.icesi.sam.bo.ObjetivoEspecificoBO;
 import co.edu.icesi.sam.bo.ObjetivoTerminalBO;
+import co.edu.icesi.sam.bo.RecursoBO;
+import co.edu.icesi.sam.bo.SaberBO;
 import co.edu.icesi.sam.client.PanelCursos;
 import co.edu.icesi.sam.client.model.CursoModel;
 import co.edu.icesi.sam.client.model.MaterialModel;
 import co.edu.icesi.sam.client.model.MetaTerminalModel;
 import co.edu.icesi.sam.client.model.ObjetivoEspecificoModel;
 import co.edu.icesi.sam.client.model.ObjetivoTerminalModel;
+import co.edu.icesi.sam.client.model.SaberModel;
 import co.edu.icesi.sam.client.tabs.TabMateriales;
 import co.edu.icesi.sam.client.tabs.TabObjEspecificos;
 import co.edu.icesi.sam.client.tabs.TabObjGeneral;
 import co.edu.icesi.sam.client.tabs.TabObjTerminales;
+import co.edu.icesi.sam.client.tabs.TabRecursos;
+import co.edu.icesi.sam.client.tabs.TabSaberes;
 
 import com.extjs.gxt.ui.client.Registry;
 import com.extjs.gxt.ui.client.mvc.AppEvent;
@@ -36,6 +41,9 @@ public class DTViewController extends Controller
         registerEventTypes( DTEvent.LISTAR_OBJ_TERMINALES );
         registerEventTypes( DTEvent.LISTAR_OBJ_ESPECIFICOS );
         registerEventTypes( DTEvent.LISTAR_OBJ_ESPECIFICOS_POR_META_TERMINAL );
+        registerEventTypes( DTEvent.LISTAR_RECURSOS_POR_SABER );
+        registerEventTypes( DTEvent.LISTAR_SABERES );
+        registerEventTypes( DTEvent.LISTAR_SABERES_POR_OBJ_ESPECIFICO );
         registerEventTypes( DTEvent.SELECCIONAR_CURSO );
     }
     
@@ -72,6 +80,9 @@ public class DTViewController extends Controller
             
             TabMateriales tabMateriales = Registry.get( "tabMateriales" );
             tabMateriales.actualizarTablaMateriales( materialesModel );
+            
+            TabRecursos tabRecursos = Registry.get( "tabRecursos" );
+            tabRecursos.actualizarTablaMateriales( materialesModel );
         }
         else if(event.getType( ).equals( DTEvent.LISTAR_METAS_TERMINALES ))
         {
@@ -98,6 +109,9 @@ public class DTViewController extends Controller
             
             TabObjEspecificos tabObjEspecificos = Registry.get( "tabObjEspecificos" );
             tabObjEspecificos.actualizarTablaObjEspecificos( objModel );
+            
+            TabSaberes tabSaberes = Registry.get( "tabSaberes" );
+            tabSaberes.actualizarTablaObjEspecificos( objModel );
         }
         else if(event.getType( ).equals( DTEvent.LISTAR_OBJ_TERMINALES ))
         {
@@ -124,6 +138,48 @@ public class DTViewController extends Controller
             
             TabObjEspecificos tabObjEspecificos = Registry.get( "tabObjEspecificos" );
             tabObjEspecificos.actualizarTablaObjEspecificos( objModel );
+        }
+        else if(event.getType( ).equals( DTEvent.LISTAR_RECURSOS_POR_SABER ))
+        {
+            List<RecursoBO> recursos = (List<RecursoBO>) event.getData( );
+            ListStore<MaterialModel> materialesModel = new ListStore<MaterialModel>( );
+            
+            for(RecursoBO bo : recursos)
+            {               
+                materialesModel.add( MaterialModel.toModelFromBO( bo ) );
+            }           
+            
+            TabRecursos tabRecursos = Registry.get( "tabRecursos" );
+            tabRecursos.actualizarTablaRecursos( materialesModel );
+        }
+        else if(event.getType( ).equals( DTEvent.LISTAR_SABERES ))
+        {
+            List<SaberBO> saberes = (List<SaberBO>) event.getData( );
+            ListStore<SaberModel> saberesModel = new ListStore<SaberModel>( );
+            
+            for(SaberBO bo : saberes)
+            {               
+                saberesModel.add( SaberModel.toModelFromBO( bo ) );
+            }
+            
+            TabSaberes tabSaberes = Registry.get( "tabSaberes" );
+            tabSaberes.actualizarTablaSaberes( saberesModel );
+            
+            TabRecursos tabRecursos = Registry.get( "tabRecursos" );
+            tabRecursos.actualizarTablaSaberes( saberesModel );
+        }
+        else if(event.getType( ).equals( DTEvent.LISTAR_SABERES_POR_OBJ_ESPECIFICO ))
+        {
+            List<SaberBO> saberes = (List<SaberBO>) event.getData( );
+            ListStore<SaberModel> sModel = new ListStore<SaberModel>( );
+            
+            for(SaberBO bo : saberes)
+            {               
+                sModel.add( SaberModel.toModelFromBO( bo ) );
+            }
+            
+            TabSaberes tabSaberes = Registry.get( "tabSaberes" );
+            tabSaberes.actualizarTablaSaberes( sModel );
         }
         else if(event.getType( ).equals( DTEvent.SELECCIONAR_CURSO ))
         {

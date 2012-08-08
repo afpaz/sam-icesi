@@ -74,7 +74,7 @@ public class TabMateriales extends TabItem
 
         ContentPanel cpMateriales = new ContentPanel( );
         cpMateriales.setBodyBorder( false );
-        cpMateriales.setHeading( MultiLingualConstants.listMateriales_heading( ) );
+        cpMateriales.setHeading( MultiLingualConstants.tableMateriales_heading( ) );
         cpMateriales.setButtonAlign( HorizontalAlignment.CENTER );
         cpMateriales.setLayout( new FitLayout( ) );
         cpMateriales.setSize( 600, 300 );

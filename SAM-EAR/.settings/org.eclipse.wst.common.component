@@ -13,10 +13,6 @@
             <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="IngesoftWAR.war" deploy-path="/" handle="module:/resource/IngesoftWAR/IngesoftWAR">
-            <dependent-object/>
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="gwt-servlet.jar" deploy-path="/lib" handle="module:/classpath/lib/SAM-WAR/WebContent/WEB-INF/lib/gwt-servlet.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>

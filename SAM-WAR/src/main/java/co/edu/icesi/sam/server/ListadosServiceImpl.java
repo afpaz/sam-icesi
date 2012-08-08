@@ -83,6 +83,12 @@ public class ListadosServiceImpl extends RemoteServiceServlet implements Listado
     }
 
     @Override
+    public List<SaberBO> listarSaberesPorCurso(int idCurso)
+    {
+        return listadosService.listarSaberesPorCurso( idCurso );
+    }
+    
+    @Override
     public List<SaberBO> listarSaberesPorObjetivoEspecifico( int idObjEspecifico )
     {
         return listadosService.listarSaberesPorObjetivoEspecifico( idObjEspecifico );

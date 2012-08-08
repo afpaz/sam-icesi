@@ -25,6 +25,7 @@ public interface GestionListadosSessionRemote {
     public List<ObjetivoEspecificoBO> listarObjEspecificosPorUnidad(int idUnidad);
     public List<ObjetivoTerminalBO> listarObjTerminalesPorCurso(int idCurso);
     public List<RecursoBO> listarRecursosPorSaber(int idSaber);
+    public List<SaberBO> listarSaberesPorCurso(int idCurso);
     public List<SaberBO> listarSaberesPorObjetivoEspecifico(int idObjEspecifico);
     public List<SesionBO> listarSesionesPorUnidad(int idUnidad);
     public List<TrabajoAsignadoBO> listarTrabajosAsignadosPorSesion(int idSesion);

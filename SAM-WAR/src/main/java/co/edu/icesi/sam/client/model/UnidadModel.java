@@ -3,7 +3,9 @@ package co.edu.icesi.sam.client.model;
 import java.io.Serializable;
 import java.util.List;
 
-public class UnidadBO implements Serializable
+import com.extjs.gxt.ui.client.data.BaseModel;
+
+public class UnidadModel extends BaseModel implements Serializable
 {
     private int id;
     private int numero;
@@ -15,7 +17,7 @@ public class UnidadBO implements Serializable
     private List<Integer> metasTerminales;
     private List<Integer> sesiones;
     
-    public UnidadBO( )
+    public UnidadModel( )
     {
 
     }

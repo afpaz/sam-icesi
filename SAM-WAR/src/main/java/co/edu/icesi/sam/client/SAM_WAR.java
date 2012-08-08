@@ -5,6 +5,8 @@ import co.edu.icesi.sam.client.tabs.TabMateriales;
 import co.edu.icesi.sam.client.tabs.TabObjEspecificos;
 import co.edu.icesi.sam.client.tabs.TabObjGeneral;
 import co.edu.icesi.sam.client.tabs.TabObjTerminales;
+import co.edu.icesi.sam.client.tabs.TabRecursos;
+import co.edu.icesi.sam.client.tabs.TabSaberes;
 import co.edu.icesi.sam.shared.FieldVerifier;
 
 import com.extjs.gxt.ui.client.Registry;
@@ -61,13 +63,21 @@ public class SAM_WAR implements EntryPoint
         TabObjEspecificos tabObjEspecificos = new TabObjEspecificos( );
         Registry.register( "tabObjEspecificos", tabObjEspecificos );
         
+        TabSaberes tabSaberes = new TabSaberes( );
+        Registry.register( "tabSaberes", tabSaberes );
+        
         TabMateriales tabMateriales = new TabMateriales( );
         Registry.register( "tabMateriales", tabMateriales );
+        
+        TabRecursos tabRecursos = new TabRecursos( );
+        Registry.register( "tabRecursos", tabRecursos );
 
         tabs.add( tabObjGeneral );
         tabs.add( tabObjTerminales );
         tabs.add( tabObjEspecificos );
+        tabs.add( tabSaberes );
         tabs.add( tabMateriales );
+        tabs.add( tabRecursos );
         RootPanel.get("listadoCursos").add( panelCursos );        
         RootPanel.get("tabs").add( tabs );
     }

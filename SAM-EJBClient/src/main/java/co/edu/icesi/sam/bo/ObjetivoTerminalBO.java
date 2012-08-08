@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class ObjetivoTerminalBO implements Serializable
+public class ObjetivoTerminalBO implements IsSerializable
 {
     private int id;
     private String nombre;

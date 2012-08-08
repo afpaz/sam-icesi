@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import co.edu.icesi.sam.bo.MaterialBO;
+import co.edu.icesi.sam.bo.RecursoBO;
+import co.edu.icesi.sam.bo.SaberBO;
 
 import com.extjs.gxt.ui.client.data.BaseModel;
 
@@ -48,4 +50,13 @@ public class MaterialModel extends BaseModel implements Serializable
         
         return mModel;
     }   
+    
+    public static MaterialModel toModelFromBO( RecursoBO bo )
+    {
+        MaterialModel mModel = new MaterialModel( );
+        mModel.set( "id", bo.getId( ) );
+        mModel.set( "nombre", bo.getNombreMaterial( ) );
+        
+        return mModel;
+    } 
 }

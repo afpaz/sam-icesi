@@ -9,19 +9,21 @@ public interface MultiLingualConstants extends Constants
     String msgAgregar( );
     String msgEditar( );
     String msgEliminar( );
-    String msgError( );    
+    String msgError( );
 
     // PanelCursos
     String tableCursos_heading( );
     String columnCursos_nombre( );
     String columnCursos_codigo( );
 
-    //Botones
-    String btnAgregar_text();
-    String btnEditar_text();
+    // Botones
+    String btnAgregar_text( );
+    String btnEditar_text( );
+    String btnAsociar_text();
     // Labels Objetivos
     String labNombre_text( );
     String labContenido_text( );
+    String labTipo_text( );
 
     // TabObjGeneral
     String tabObjGeneral_text( );
@@ -29,45 +31,71 @@ public interface MultiLingualConstants extends Constants
 
     // TabObjTerminal
     String tabObjTerminales_text( );
+
+    String tableObjTerminales_heading( );
+    String columnObjTerminales_nombre( );
+    String columnObjTerminales_contenido( );
     
-    String tableObjTerminales_heading();
-    String columnObjTerminales_nombre();
-    String columnObjTerminales_contenido();
+    // TabUnidades
+    String tabUnidades_text();
 
     // TabObjEspeficicos
-    String tabObjEspecificos_text();
-    
+    String tabObjEspecificos_text( );
+
     String tableMetasTerminales_heading( );
     String columnMetasTerminales_nombreUnidad( );
     String columnMetasTerminales_contenidoUnidad( );
     String columnMetasTerminales_nombreObjTerminal( );
     String columnMetasTerminales_contenidoObjTerminal( );
-    
-    String tableObjEspecificos_heading();
-    String columnObjEspecificos_nombre();
-    String columnObjEspecificos_contenido();
 
-    String msgSeleccionarMetaTerminal();
-    String msgMetaTerminal();
-    
+    String tableObjEspecificos_heading( );
+    String columnObjEspecificos_nombre( );
+    String columnObjEspecificos_contenido( );
+
+    String msgSeleccionarMetaTerminal( );
+    String msgMetaTerminal( );
+
+    // TabSaberes
+    String tabSaberes_text( );
+
+    String tableSaberes_heading( );
+    String columnSaberes_nombre( );
+    String columnSaberes_tipo( );
+    String columnSaberes_contenido( );
+
+    String msgSeleccionarObjEspecifico( );
+    String msgObjEspecifico( );
+
     // TabMateriales
-    String tabMateriales_text();
-    
-    String listMateriales_heading(); 
-    
+    String tabMateriales_text( );
+    String tableMateriales_heading( );
+
+    // TabRecursos
+    String tabRecursos_text( );
+    String tableRecursos_heading( );
+
+    String msgSeleccionarSaber( );
+    String msgRecurso( );
+
+    String msgSeleccionarMaterial( );
+
     // DialogoAgregarObjTerminal
-    String dialogoAgregarObjTerminal_heading( );   
+    String dialogoAgregarObjTerminal_heading( );
     // DialogoEditarObjTerminal
     String dialogoEditarObjTerminal_heading( );
-    
+
     // DialogoAgregarObjEspecifico
-    String dialogoAgregarObjEspecifico_heading( );    
+    String dialogoAgregarObjEspecifico_heading( );
     // DialogoEditarObjEspecifico
     String dialogoEditarObjEspecifico_heading( );
-    
+
+    // DialogoAgregarSaber
+    String dialogoAgregarSaber_heading( );
+    // DialogoEditarSaber
+    String dialogoEditarSaber_heading( );
+
     // DialogoAgregarMaterial
     String dialogoAgregarMaterial_heading( );
-    
     // DialogoEditarMaterial
     String dialogoEditarMaterial_heading( );
 }
